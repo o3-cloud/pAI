@@ -1,0 +1,25 @@
+FROM yeahdongcn/agentman-base:latest
+MODEL gpt-4.1
+# Add web search capability
+MCP_SERVER fetch
+COMMAND uvx
+ARGS mcp-server-fetch
+TRANSPORT stdio
+
+MCP_SERVER gmail
+COMMAND npx
+ARGS -y @gongrzhe/server-gmail-autoauth-mcp
+TRANSPORT stdio
+
+AGENT gmail_newletter
+INSTRUCTION You are a newsletter editor. Using the personal context I’ve provided, from the past 7 days lookup the emails with labels that match my Interests & Hobbies, perform the following: \
+1. Look up the available labels \
+2. Using these labels extract the most useful and relevant information from these emails to curate a coherent weekly newsletter. \
+3. Organize the content into a well-structured format (e.g., introduction, highlights, sections per interest). \
+4. Cite the original email and source links clearly for each piece of information. \
+5. Label the finalized newsletter draft as a “pIA” newsletter draft for my review. \
+6. Exclude any offers or promos. \
+Ensure tone consistency with previous newsletters if available. If any source appears ambiguous or irrelevant, omit it or flag it separately.
+SERVERS fetch gmail
+
+CMD ["python", "agent.py", "-p", "prompt.txt", "--agent", "gmail_newletter"]

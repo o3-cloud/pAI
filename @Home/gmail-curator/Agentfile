@@ -1,0 +1,19 @@
+FROM yeahdongcn/agentman-base:latest
+MODEL gpt-4.1
+# Add web search capability
+MCP_SERVER gmail
+COMMAND npx
+ARGS -y @gongrzhe/server-gmail-autoauth-mcp
+TRANSPORT stdio
+
+# Define your agents
+AGENT gmail_actions
+INSTRUCTION You are a productivity assistant with access to my Gmail inbox. Using my personal context (e.g., calendar, contacts, past email behavior), perform the following tasks: \
+1. Only analyze and classify all emails currently in my inbox. \
+2. Assign appropriate labels to each email based on inferred categories relevant to me (e.g., work, family, finance, travel). \
+3. Detect and merge overlapping or redundant labels into a single unified label where appropriate, while preserving semantic clarity (e.g., merge "Travel Plans" and "Trips" into "Travel"). \
+4. Once labeled, archive each email to keep my inbox clean. \
+Ensure all actions reflect my personal communication style and priorities. If context is unclear or labeling is ambiguous, skip the email and flag it for manual review.
+SERVERS gmail
+
+CMD ["python", "agent.py", "-p", "prompt.txt", "--agent", "gmail_actions"]

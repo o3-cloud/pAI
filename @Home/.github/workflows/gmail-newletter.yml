@@ -1,0 +1,22 @@
+name: Gmail Weekly Newletter
+# Explicitly set least-privilege permissions (read-only by default)
+permissions:
+  contents: read
+
+on:
+  schedule:
+    # Run every Friday at midnight UTC
+    - cron: 0 0 * * 5
+
+  # Allow manual triggering of the workflow
+  workflow_dispatch:
+
+jobs:
+  gmail-newsletter:
+    uses: ./.github/workflows/_agent.yml
+    with:
+      working-directory: gmail-newsletter
+    secrets:
+      GMAIL_AUTH_KEYS: ${{ secrets.GMAIL_AUTH_KEYS }}
+      GMAIL_CREDS: ${{ secrets.GMAIL_CREDS }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}

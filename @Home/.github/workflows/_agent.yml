@@ -1,0 +1,55 @@
+permissions:
+  contents: read
+
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        required: true
+        type: string
+    secrets:
+      GMAIL_AUTH_KEYS:
+        required: true
+      GMAIL_CREDS:
+        required: true
+      OPENAI_API_KEY:
+        required: true
+
+jobs:
+  scheduled-task:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Set up Python
+        run: uv python install
+
+      - name: Install Task runner
+        run: |
+          sudo sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
+
+      - name: Install Agentman
+        run: |
+          uv tool install git+https://github.com/AgentO3/agentman.git@main#egg=agentman-mcp
+
+      - name: Set up Gmail MCP credentials
+        env:
+          GMAIL_AUTH_KEYS: ${{ secrets.GMAIL_AUTH_KEYS }}
+          GMAIL_CREDS: ${{ secrets.GMAIL_CREDS }}
+        run: |
+          mkdir -p ~/.gmail-mcp
+          echo "${GMAIL_AUTH_KEYS}" > ~/.gmail-mcp/gcp-oauth.keys.json
+          echo "${GMAIL_CREDS}" > ~/.gmail-mcp/credentials.json
+          chmod 600 ~/.gmail-mcp/gcp-oauth.keys.json ~/.gmail-mcp/credentials.json
+          echo "Gmail MCP credentials configured"
+
+      - name: Run gmail curator setup
+        working-directory: ${{ inputs.working-directory }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          task run

@@ -1,0 +1,25 @@
+name: Gmail Curator
+permissions:
+  contents: read
+
+on:
+  schedule:
+    # Run at 8:00 AM EST (1:00 PM UTC)
+    - cron: 0 13 * * *
+    # Run at 11:30 AM EST (4:30 PM UTC)
+    - cron: 30 16 * * *
+    # Run at 7:30 PM EST (12:30 AM UTC next day)
+    - cron: 30 0 * * *
+
+  # Allow manual triggering of the workflow
+  workflow_dispatch:
+
+jobs:
+  gmail-curator:
+    uses: ./.github/workflows/_agent.yml
+    with:
+      working-directory: gmail-curator
+    secrets:
+      GMAIL_AUTH_KEYS: ${{ secrets.GMAIL_AUTH_KEYS }}
+      GMAIL_CREDS: ${{ secrets.GMAIL_CREDS }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}

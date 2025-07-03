@@ -1,0 +1,8 @@
+FROM python:3.12-slim-bookworm
+MODEL gpt-4.1
+# Add web search capability
+
+AGENT summarize
+INSTRUCTION Summarze the input
+
+CMD ["python", "agent.py", "-p", "prompt.txt", "--agent", "summarize"]

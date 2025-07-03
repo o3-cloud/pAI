@@ -1,0 +1,9 @@
+version: 3
+tasks:
+  prompt:
+    - cat ../ME.md > prompt.txt
+  agent:
+   - agentman run --rm -e OPENAI_API_KEY=$OPENAI_API_KEY -v ~/.gmail-mcp:/root/.gmail-mcp --from-agentfile -f Agentfile
+  run:
+   - task: prompt
+   - task: agent
