@@ -1,4 +1,4 @@
-FROM yeahdongcn/agentman-base:latest
+FROM ghcr.io/o3-cloud/pai/base:latest
 MODEL gpt-4.1
 # Add web search capability
 MCP_SERVER gmail
