@@ -85,6 +85,36 @@ mindmap
 
 ```
 
+## 📚 Documentation
+
+### Quick Start
+- **New to pAI?** Start with our [Quick Start Guide](docs/getting-started/quick-start.md)
+- **Prerequisites** - [Check requirements](docs/getting-started/prerequisites.md)
+- **First Agent** - [Step-by-step tutorial](docs/getting-started/first-agent.md)
+
+### Development
+- **Creating Agents** - [Development guide](docs/development/creating-agents.md)
+- **Architecture** - [System overview](docs/architecture/overview.md)
+- **Troubleshooting** - [Common issues](docs/troubleshooting/common-issues.md)
+
+### Agent Documentation
+- **@Home Agents** - [Personal automation](/@Home/README.md)
+- **@Work Agents** - [Professional workflows](/@Work/README.md)
+
+---
+
+## 📖 Table of Contents
+
+1. [Definition](#-definition)
+2. [Core Principles](#-core-principles)  
+3. [Platform & Technology](#-platform-fast-agent--github-actions)
+4. [Agent Organization](#-agent-organization)
+5. [Getting Started](#-getting-started)
+6. [Implementation Status](#-current-implementation-status)
+7. [Benefits](#-benefits)
+8. [Next Steps](#-next-steps)
+9. [Challenges](#-current-challenges)
+
 ---
 
 ## 🧾 Definition
@@ -140,12 +170,28 @@ Each agent includes:
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### New User? Start Here!
 
-- [Taskfile](https://taskfile.dev/) - Modern task runner
-- [Fast Agent](https://fast-agent.ai/) - AI agent framework
-- [Agentman](https://github.com/AgentO3/agentman) - Agent scaffolding tool
-- OpenAI API key for LLM capabilities
+1. **[Check Prerequisites](docs/getting-started/prerequisites.md)** - Ensure you have required tools
+2. **[Quick Start Guide](docs/getting-started/quick-start.md)** - Set up your first agent in 10 minutes
+3. **[First Agent Tutorial](docs/getting-started/first-agent.md)** - Guided walkthrough with Gmail Curator
+
+### Quick Setup
+
+```bash
+# 1. Install required tools
+brew install go-task            # Task runner
+npm install -g agentman        # Agent framework
+
+# 2. Clone and setup
+git clone https://github.com/o3-cloud/pAI.git
+cd pAI
+export OPENAI_API_KEY="your-api-key-here"
+
+# 3. Run your first agent
+cd @Home/gmail-curator
+task run
+```
 
 ### Repository Structure
 
@@ -158,21 +204,19 @@ pAI/
 ├── @Work/              # Professional workflow agents
 │   ├── pr-diff-auditor/ # PR analysis and security scanning
 │   └── test-coverage-advisor/ # Test coverage monitoring
-└── docs/
-    ├── README.md       # This file
-    └── STACK.md        # Technology stack details
+└── docs/               # Comprehensive documentation
+    ├── getting-started/ # Setup guides and tutorials
+    ├── development/     # Agent development guides
+    ├── architecture/    # System architecture docs
+    └── troubleshooting/ # Common issues and solutions
 ```
 
-### Running an Agent
+### Next Steps
 
-Each agent can be run locally using Taskfile:
-
-```bash
-cd @Home/gmail-curator
-task run
-```
-
-Or deployed to GitHub Actions for automated scheduling.
+- **Customize agents** - Edit `ME.md` files for personal context
+- **Create new agents** - Follow the [Development Guide](docs/development/creating-agents.md)
+- **Set up automation** - Deploy to GitHub Actions for scheduling
+- **Need help?** - Check our [Troubleshooting Guide](docs/troubleshooting/common-issues.md)
 
 ---
 
