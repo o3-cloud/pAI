@@ -1,0 +1,63 @@
+name: Create Agent Task
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch_name:
+        description: Name of the new branch
+        required: true
+        type: string
+        default: agent-task
+      title:
+        description: Title for the pull request
+        required: true
+        type: string
+        default: Agent Task
+      context:
+        description: Context about the task
+        required: false
+        type: string
+        default:
+      base_branch:
+        description: Base branch to create PR against
+        required: false
+        type: string
+        default: main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  create-branch-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create and push new branch
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          DATE=$(date +%Y-%m-%d-%H-%M-%S)
+          BRANCH_NAME=${{ inputs.branch_name }}-${DATE}
+          git checkout -b ${BRANCH_NAME}
+          git push origin ${BRANCH_NAME}
+          mkdir -p tasks/$DATE
+          touch tasks/$DATE/TASKS.md
+          git add tasks/$DATE/TASKS.md
+          git commit -m "Adding file TASKS.md file for $DATE"
+          git push origin ${BRANCH_NAME}
+          gh pr create \
+            --title "${{ inputs.title }}" \
+            --body "@claude help me plan this task. \
+            ${{ inputs.context }}" \
+            --base "${{ inputs.base_branch }}" \
+            --head "${BRANCH_NAME}"
