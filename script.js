@@ -35,7 +35,7 @@ class PodcastPlayer {
 
     async loadPlaylist() {
         try {
-            const response = await fetch('.reporadio/onboarding/episodes/playlist.json');
+            const response = await fetch('https://raw.githubusercontent.com/o3-cloud/pAI/refs/heads/main/.reporadio/onboarding/episodes/playlist.json');
             const data = await response.json();
             this.playlist = data.playlist;
             this.renderPlaylist();
@@ -85,7 +85,7 @@ class PodcastPlayer {
         });
 
         // Load audio
-        this.audioSource.src = `.reporadio/onboarding/episodes/${episode.audioFile}`;
+        this.audioSource.src = `https://raw.githubusercontent.com/o3-cloud/pAI/refs/heads/main/.reporadio/onboarding/episodes/${episode.audioFile}`;
         this.audio.load();
 
         // Load transcript
@@ -100,7 +100,7 @@ class PodcastPlayer {
 
     async loadTranscript(transcriptFile) {
         try {
-            const response = await fetch(`.reporadio/onboarding/episodes/${transcriptFile}`);
+            const response = await fetch(`https://raw.githubusercontent.com/o3-cloud/pAI/refs/heads/main/.reporadio/onboarding/episodes/${transcriptFile}`);
             const text = await response.text();
             this.episodeTranscript.innerHTML = this.formatTranscript(text);
         } catch (error) {
