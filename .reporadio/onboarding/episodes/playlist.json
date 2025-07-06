@@ -1,0 +1,48 @@
+{
+  "playlist": {
+    "title": "pAI Onboarding Series",
+    "description": "A comprehensive introduction to personal AI systems and agents",
+    "episodes": [
+      {
+        "id": "ep1",
+        "title": "Kickstarting Your Journey with pAI",
+        "description": "Introduction to personal AI systems, exploring what pAI is and how intelligent agents can transform your daily life at home and work. Covers core principles like individual context, composability, and the shift from centralized to personalized automation.",
+        "audioFile": "ep1.mp3",
+        "transcriptFile": "ep1.md",
+        "summary": "Defines pAI as your personal team of intelligent agents, explains the technology stack including FastAgent and GitHub Actions, and introduces agent organization with @Home and @Work contexts."
+      },
+      {
+        "id": "ep2", 
+        "title": "Setting Up Your Personal AI Agents",
+        "description": "A practical step-by-step guide to setting up Gmail Curator and Gmail Newsletter agents. Covers technical requirements, authentication setup, and how to run agents to reduce email overload and mental clutter.",
+        "audioFile": "ep2.mp3",
+        "transcriptFile": "ep2.md",
+        "summary": "Walks through the setup process for pAI@Home agents, including installing Taskfile and Agentman, configuring Gmail access, and running agents to automate email management with personal context."
+      },
+      {
+        "id": "ep3",
+        "title": "Meet Your Personal AI Agents", 
+        "description": "Deep dive into specific AI agents including Gmail Curator, PR Diff Auditor, and Test Coverage Advisor. Explores their functionalities, capabilities, and how they boost productivity through intelligent automation.",
+        "audioFile": "ep3.mp3",
+        "transcriptFile": "ep3.md",
+        "summary": "Detailed exploration of individual agents: Gmail Curator for email classification and management, PR Diff Auditor for code security analysis, and Test Coverage Advisor for monitoring test quality and suggesting improvements."
+      },
+      {
+        "id": "ep4",
+        "title": "Staying Secure with Your Personal AI",
+        "description": "Critical security considerations for AI deployment, focusing on securing MCP servers and managing API tokens effectively. Covers authentication, encryption, token rotation, and monitoring best practices.",
+        "audioFile": "ep4.mp3", 
+        "transcriptFile": "ep4.md",
+        "summary": "Security-focused episode covering MCP server protection through strong authentication and encryption, plus API token management including unique tokens, restricted permissions, regular rotation, and usage monitoring."
+      },
+      {
+        "id": "ep5",
+        "title": "Conclusion and Next Steps in Your pAI Journey",
+        "description": "Series wrap-up covering the pAI journey from basics to real-world applications. Provides resources for continued learning including courses, forums, books, and networking opportunities in the AI space.",
+        "audioFile": "ep5.mp3",
+        "transcriptFile": "ep5.md", 
+        "summary": "Final episode recapping the pAI series, discussing future applications in healthcare, education, and customer service, and providing resources for continued learning including online courses, communities, and professional development."
+      }
+    ]
+  }
+}

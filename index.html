@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pAI Onboarding Podcast</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>pAI Onboarding Series</h1>
+            <p>A comprehensive introduction to personal AI systems and agents</p>
+        </header>
+
+        <main>
+            <div class="player-container">
+                <div class="episode-info">
+                    <h2 id="episode-title">Loading...</h2>
+                    <p id="episode-description">Loading episode information...</p>
+                </div>
+
+                <div class="audio-player">
+                    <audio id="audio-element" preload="metadata">
+                        <source id="audio-source" src="" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    
+                    <div class="player-controls">
+                        <button id="play-pause-btn" class="control-btn">
+                            <span class="play-icon">▶</span>
+                            <span class="pause-icon" style="display: none;">⏸</span>
+                        </button>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                            <div class="time-display">
+                                <span id="current-time">0:00</span>
+                                <span id="total-time">0:00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="volume-control">
+                            <button id="volume-btn" class="control-btn">🔊</button>
+                            <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="episode-navigation">
+                    <button id="prev-btn" class="nav-btn">⏮ Previous</button>
+                    <span id="episode-counter">1 / 5</span>
+                    <button id="next-btn" class="nav-btn">Next ⏭</button>
+                </div>
+            </div>
+
+            <div class="content-tabs">
+                <button class="tab-btn active" data-tab="summary">Summary</button>
+                <button class="tab-btn" data-tab="transcript">Transcript</button>
+            </div>
+
+            <div class="content-panel">
+                <div id="summary-content" class="tab-content active">
+                    <p id="episode-summary">Loading summary...</p>
+                </div>
+                <div id="transcript-content" class="tab-content">
+                    <div id="episode-transcript">Loading transcript...</div>
+                </div>
+            </div>
+
+            <div class="playlist">
+                <h3>Episodes</h3>
+                <div id="episode-list" class="episode-list">
+                    <!-- Episodes will be populated by JavaScript -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

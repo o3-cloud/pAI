@@ -1,0 +1,41 @@
+# GitHub Pages configuration
+title: "pAI Onboarding Podcast"
+description: "A comprehensive introduction to personal AI systems and agents"
+baseurl: ""
+url: "https://owenzanzal.github.io/pAI"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - "@Home/"
+  - "@Work/"
+  - docker/
+  - STACK.md
+  - CLAUDE.md
+  - node_modules/
+  - Gemfile
+  - Gemfile.lock
+  - .git/
+  - .gitignore
+
+# Include specific files
+include:
+  - .reporadio/
+
+# Custom variables
+podcast:
+  title: "pAI Onboarding Series"
+  description: "Learn about personal AI systems and intelligent agents"
+  author: "pAI Team"
+  category: "Technology"
+  language: "en-us"

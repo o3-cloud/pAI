@@ -1,0 +1,46 @@
+title: 'Your AI Team: Personal Agents for Work and Home'
+description: This podcast explores the world of Personal AI (pAI) systems, offering insights into how intelligent agents can automate and augment your work both at home and in the office. Discover how you can harness pAI to streamline tasks, improve decision-making, and align workflows with your personal goals and values. Tune in for a high-level overview of setting up your own AI team, with references and resources to dive deeper into this transformative technology.
+instructions: Listeners are reminded to set daily cost limits on their OpenAI accounts, as maintaining multiple agents can quickly add up expenses. Ensure that your MCP server's security is robust by using only trusted providers and authors. Additionally, when deploying MCP, be prudent with API tokens by setting only the necessary privileges to maintain security.
+voicing: Very friendly and conversational but still professional.
+type: podcast
+episodes:
+    - title: Kickstarting Your Journey with pAI
+      description: An introduction to Personal AI systems, what pAI is, and how it can revolutionize your daily tasks at home and work.
+      instructions: Discuss the definition of pAI, core principles, and how it shifts mindsets in everyday work.
+      voicing: Friendly and conversational, yet professional.
+      include:
+        - README.md
+      commands: []
+    - title: Setting Up Your Personal AI Agents
+      description: A step-by-step guide on setting up your pAI agents, including the necessary tools and configurations to get started.
+      instructions: Walk through the setup of each agent, referencing the README files for details.
+      voicing: Friendly and conversational, yet professional.
+      include:
+        - '@Home/README.md'
+        - '@Home/gmail-curator/README.md'
+        - '@Home/gmail-newsletter/README.md'
+        - '@Work/README.md'
+      commands: []
+    - title: Meet Your Personal AI Agents
+      description: Explore the specific agents available under pAI, including Gmail Curator and PR Diff Auditor, and their functionalities.
+      instructions: Describe the purpose and functionality of each agent, highlighting their benefits.
+      voicing: Friendly and conversational, yet professional.
+      include:
+        - '@Home/gmail-curator/Agentfile'
+        - '@Home/gmail-curator/Taskfile.yml'
+        - '@Home/gmail-newsletter/Agentfile'
+        - '@Work/pr-diff-auditor/README.md'
+        - '@Work/test-coverage-advisor/README.md'
+      commands: []
+    - title: Staying Secure with Your Personal AI
+      description: Discuss important security precautions when using MCP servers and managing API tokens effectively.
+      instructions: Emphasize the importance of security in deploying agents and using OpenAI APIs.
+      voicing: Friendly and conversational, yet professional.
+      include: []
+      commands: []
+    - title: Conclusion and Next Steps in Your pAI Journey
+      description: A recap of the podcast's key points, sharing resources for deeper learning and encouraging listeners to explore the pAI ecosystem further.
+      instructions: Provide a concise summary of the previous episodes and direct listeners to learn more through links and resources.
+      voicing: Friendly and conversational, yet professional.
+      include: []
+      commands: []

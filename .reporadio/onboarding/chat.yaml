@@ -1,0 +1,243 @@
+end_time: 2025-07-06T10:59:50.946068-04:00
+entries:
+    - message: Help me onboard
+      role: user
+      step: conversation
+      timestamp: 2025-07-06T10:48:08.216446-04:00
+    - message: Great! Let's start by defining the title for your podcast series focused on "pAI – Personal AI Systems for Modern Work." Do you have a specific title in mind, or would you like some suggestions?
+      role: assistant
+      step: conversation
+      timestamp: 2025-07-06T10:48:10.502205-04:00
+    - message: What do you suggest based on the README.md
+      role: user
+      step: conversation
+      timestamp: 2025-07-06T10:48:55.438043-04:00
+    - message: |-
+        Based on the README.md, here are a few podcast title suggestions:
+
+        1. "Your AI Team: Personal Agents in Modern Work"
+        2. "pAI for You: Intelligent Agents at Work"
+        3. "Automating Tomorrow: The Personal AI Podcast"
+        4. "pAI Innovators: Transforming Workflows with AI"
+        5. "Everyday AI: Personal Agents for Modern Life"
+
+        Do any of these resonate with you, or would you like to explore other options?
+      role: assistant
+      step: conversation
+      timestamp: 2025-07-06T10:48:58.334869-04:00
+    - message: 'Your AI Team: Personal Agents for Work and Home'
+      role: user
+      step: conversation
+      timestamp: 2025-07-06T10:49:40.207373-04:00
+    - message: Excellent choice! Now let's move on to the next part. Could you provide a high-level summary or description of what your podcast will cover? Feel free to outline the main themes or topics you intend to focus on. If you'd like, I can suggest a description based on the provided content.
+      role: assistant
+      step: conversation
+      timestamp: 2025-07-06T10:49:41.899838-04:00
+    - message: Looking to give folks an overview of what this project is about and a quick very high level overview of how to use it and suggest reference to learn more.
+      role: user
+      step: conversation
+      timestamp: 2025-07-06T10:50:51.476577-04:00
+    - message: |-
+        Based on your input, here's a suggested description for your podcast:
+
+        "This podcast explores the world of Personal AI (pAI) systems, offering insights into how intelligent agents can automate and augment your work both at home and in the office. Discover how you can harness pAI to streamline tasks, improve decision-making, and align workflows with your personal goals and values. Tune in for a high-level overview of setting up your own AI team, with references and resources to dive deeper into this transformative technology."
+
+        Does this description align with your vision, or would you like to make any adjustments?
+      role: assistant
+      step: conversation
+      timestamp: 2025-07-06T10:50:54.151293-04:00
+    - message: "yes"
+      role: user
+      step: conversation
+      timestamp: 2025-07-06T10:51:10.733275-04:00
+    - message: Great! Now let's move on to the instructions. What special instructions would you like to include for this onboarding step? This could be guidance on how listeners can set up their own pAI or any specific actions you want them to take after listening.
+      role: assistant
+      step: conversation
+      timestamp: 2025-07-06T10:51:12.001398-04:00
+    - message: Remind users to set daily cost limits for their OpenAI account. Generally agents don'thaving a few agents running reguarly can cause costs to add up quick. Be aware of MCP server security and to only use MCP servers from trusted providers and authors. With API tokens used by the MCP make sure you only set the privilages you need.
+      role: user
+      step: conversation
+      timestamp: 2025-07-06T10:59:03.147102-04:00
+    - message: |-
+        Here's a draft for the instructions based on your guidance:
+
+        "Listeners are reminded to set daily cost limits on their OpenAI accounts, as maintaining multiple agents can quickly add up expenses. Ensure that your MCP server's security is robust by using only trusted providers and authors. Additionally, when deploying MCP, be prudent with API tokens by setting only the necessary privileges to maintain security."
+
+        Does this align with what you were thinking, or would you like any modifications?
+      role: assistant
+      step: conversation
+      timestamp: 2025-07-06T10:59:06.197636-04:00
+    - message: "yes"
+      role: user
+      step: conversation
+      timestamp: 2025-07-06T10:59:11.37357-04:00
+    - message: Perfect! Lastly, let's define the tone and style for your podcast's voicing. How would you like the content to be presented? Should it be professional, conversational, technical, or another style? Let me know if you need suggestions based on the context.
+      role: assistant
+      step: conversation
+      timestamp: 2025-07-06T10:59:14.185015-04:00
+    - message: Very friendly and conversational but still professional.
+      role: user
+      step: conversation
+      timestamp: 2025-07-06T10:59:45.706791-04:00
+    - message: "Excellent choice! A very friendly and conversational yet professional tone will make your podcast accessible and engaging while maintaining credibility. \n\nHere's a quick recap of what we have configured for your podcast series:\n\n- **Title**: Your AI Team: Personal Agents for Work and Home\n- **Description**: This podcast explores the world of Personal AI (pAI) systems, offering insights into how intelligent agents can automate and augment your work both at home and in the office. Discover how you can harness pAI to streamline tasks, improve decision-making, and align workflows with your personal goals and values. Tune in for a high-level overview of setting up your own AI team, with references and resources to dive deeper into this transformative technology.\n- **Instructions**: Listeners are reminded to set daily cost limits on their OpenAI accounts, as maintaining multiple agents can quickly add up expenses. Ensure that your MCP server's security is robust by using only trusted providers and authors. Additionally, when deploying MCP, be prudent with API tokens by setting only the necessary privileges to maintain security.\n- **Voicing**: Very friendly and conversational but still professional.\n\nSETUP COMPLETE"
+      role: assistant
+      step: completion
+      timestamp: 2025-07-06T10:59:50.946064-04:00
+    - message: |-
+        Episode 1: Kickstarting Your Journey with pAI
+
+        # Kickstarting Your Journey with pAI
+
+        **[Introduction]**
+
+        Hello everyone, and welcome back to another episode of our exciting podcast series. I'm your host, Alex, and thank you for joining us today. If you've been with us for our previous episodes, you've started to get your foothold on what personal AI or pAI systems are. Today, we'll dive deeper into how these little AI helpers can transform your daily life both at home and at work. So, grab your coffee, get comfortable, and let's explore!
+
+        **[Defining pAI]**
+
+        So, what exactly is pAI? Imagine having your own team of intelligent agents who just get you. They're not just tools you use—they're like your AI buddies, working with and for you, understanding your personal workflow, automating the nitty-gritty tasks, and supporting your decision-making processes. These agents are there to support you in a way that's both proactive and personalized.
+
+        **[Core Principles]**
+
+        Let's talk about the core principles that pAI systems adhere to. The magic of pAI lies in its alignment with your individual context. Everything an agent does is tailored to you—your goals, your standards, your preferences. It’s a bespoke service rather than a cookie-cutter solution.
+
+        Then, there's the composable nature of these agents. Think of them as made up of lightweight workflows, prompts, and tools that are designed to evolve as your needs do. Plus, each agent is what we call "agentic," operating semi-autonomously while keeping you, the decision-maker, in the loop. You remain the driver, and the AI facilitates the journey.
+
+        pAI systems are all about decentralized ownership, meaning you—or whatever team you’re a part of—own the automations. And what's more, these agents are interoperable. They cross boundaries between different systems, optimizing communication between your emails, cloud services, coding tasks, and beyond.
+
+        **[Shifting Mindsets in Everyday Work]**
+
+        Now, let's talk about how pAI can shift our mindsets in everyday work. Traditionally, we've relied on centralized tools that often have a one-size-fits-all approach. pAI turns this on its head by offering a personalized, decentralized automation experience. Imagine throwing out the manual triaging you do every day and letting AI handle these tasks while you focus on the things that truly need your expertise.
+
+        There's a shift in the hiring perspective too. It's no longer just about what skills you bring—they're also looking at the system you come with. pAI introduces tailored workflows, converting work from mere execution to a kind of orchestration. It's a bit like being a maestro with your agents as the experienced musicians.
+
+        **[The Nuts and Bolts of the Technology]**
+
+        So, what's making all this possible? It's a well-coordinated technology stack, including Fast Agent and GitHub Actions. These tools provide the framework and scheduled automation that underpin your pAI. They ensure everything is run seamlessly, with an auditable trail that maintains security and transparency in your workflows.
+
+        **[Agent Organization: At Home and Work]**
+
+        In practical terms, pAI agents are organized into two main contexts: @Home and @Work. You’ve got agents like Gmail Curator and Gmail Newsletter in your personal life, streamlining email overload with summaries and curated digests. Over in the professional sphere, you have tools like the PR Diff Auditor, which keeps an eye on pull request diffs to maintain code quality and identify security issues. It's about fitting the right tool for the right job—whether that job is out of your home office or at the kitchen table.
+
+        **[Implementation Status]**
+
+        Currently, we have active agents like Gmail Curator and experimental ones like Test Agent. In development are exciting new capabilities, such as the PR Diff Auditor and Test Coverage Advisor, which promise to enhance our professional workflows even further.
+
+        **[Challenges Moving Forward]**
+
+        Like any innovative technology, pAI faces challenges—things like context management or token costs. But each challenge is a stepping stone to making these systems more efficient and integral to our work life.
+
+        **[Conclusion]**
+
+        In closing, pAI systems are more than just automation tools—they're a paradigm shift towards a more personalized, efficient, and effective way of working. They're not only aiding individuals but empowering teams and entire organizations to reach new pinnacles of productivity and creativity.
+
+        Thank you for tuning into today's episode. We hope you found this insightful and inspiring. As always, we've got more exciting discussions lined up for the future, so stay tuned and don’t forget to share your thoughts and questions with us. Until next time, take care, and let your AI do the heavy lifting!
+      role: assistant
+      step: episode
+      timestamp: "2025-07-06T11:05:47.288804-04:00"
+    - message: "Episode 2: Setting Up Your Personal AI Agents\n\n# Setting Up Your Personal AI Agents\n\n**[Host 1]:** Hello, dear listeners! Welcome back to another episode of \"pAI Life,\" where we dive into the world of personal AI systems. Today, we’re exploring a topic that’s both exciting and incredibly useful—setting up your personal AI agents. We'll take you step-by-step so you can really get these agents working for you, helping make your life smoother and more intentional. How's that sound?\n\n**[Host 2]:** It sounds fantastic! If you’ve been following along with our previous episodes, you’ll remember that we’ve already discussed the conceptual frameworks of pAI systems for both personal and professional contexts. Today, we're going to build on that foundation and walk you through the practical setup of a couple of exciting agents.\n\n**[Host 1]:** That's right. And our focus today is on two agents that can significantly unclutter your personal life: the *Gmail Curator* and *Gmail Newsletter Agent*. So let's jump right in, starting with what you’ll need to get set up!\n\n**[Host 2]:** Great place to start. Both of these agents are part of the pAI@Home suite, designed to reduce mental clutter and help you focus more on what truly matters—your values, relationships, and creativity.\n\n**[Host 1]:** This setup process isn’t just about activating these agents but aligning them with the core principles we cherish: being helpful but not intrusive, keeping family and creativity central... you know the drill by now. So first thing's first—let's get into the technical necessities.\n\n**[Host 2]:** Absolutely. So, for both agents, you'll need a couple of software tools: Taskfile and Agentman. These tools help manage automation tasks and agent configuration, respectively. You’ll also need to have your OpenAI API key ready to give your agents that little bit of extra brainpower!\n\n**[Host 1]:** Exactly. Now, once those basics are sorted, you’ll need to set up access to your Gmail account, which is crucial for both agents. This involves generating a `credentials.json` file using the Gmail-MCP-Server. We won’t dive into all those nitty-gritty details again since we've covered it before. Just remember the endgame here: secure and efficient access to your emails.\n\n**[Host 2]:** After that, you'll want to store these credentials securely. Make sure they’re saved as a secret in your GitHub repository under the name `GMAIL_CREDENTIALS_JSON`. This ensures that your sensitive data remains protected while your agents do their magic.\n\n**[Host 1]:** And speaking of magic, let's talk about running these agents. Once everything's in place, you’ll need to navigate to each agent's directory—be it *gmail-curator* or *gmail-newsletter*—and run the command `task run`. This launches the agent and gets that valuable insight and filtering started.\n\n**[Host 2]:** That’s the ticket! Now, both agents, after being triggered by these commands, will update the `prompt.txt` using the contents of `ME.md`. This step is crucial because it applies your personal preferences and context, ensuring the agents operate in harmony with your life goals.\n\n**[Host 1]:** Exactly. The *Gmail Curator* is like having a personal email assistant that sifts through your inbox daily to sum up important non-newsletter emails. Meanwhile, the *Gmail Newsletter Agent* digests your weekly newsletters, serving you bite-sized nuggets of key articles to keep your curiosity hungry and informed.\n\n**[Host 2]:** And it’s all done within that gentle, playful tone we’ve emphasized—all while being casual and kind. This isn’t about automating your life with rigid schedules but enhancing presence and reducing the roadblocks to what we truly cherish.\n\n**[Host 1]:** Couldn't have summed it up better myself. For those of you wondering what's next on your pAI journey, don't forget the broader picture: you're reducing the cognitive load and making space for what truly brings joy and fulfillment. \n\n**[Host 2]:** We hope you find setting up these agents as exciting and rewarding as we do. As always, feel free to revisit previous episodes if you need a refresher on the philosophical underpinnings of these agents or the pAI system as a whole.\n\n**[Host 1]:** Thanks for joining us today, everyone! Don't forget to subscribe and catch us in the next episode, where we'll be diving into the wild world of professional agents at pAI@Work. Take care, and happy automating!\n\n**[Both Hosts]:** Goodbye!"
+      role: assistant
+      step: episode
+      timestamp: "2025-07-06T11:06:51.245564-04:00"
+    - message: "Episode 3: Meet Your Personal AI Agents\n\n# Meet Your Personal AI Agents\n\n**Host:** Welcome to another episode of our podcast, where we dive deep into the world of personal AI agents designed to make your life simpler and more efficient! Today, we're drilling down into some specific AI agents under the pAI umbrella, including the Gmail Curator and the PR Diff Auditor. We'll be exploring their functionalities and how they can be your new best friends in boosting productivity and efficiency. So, grab a cup of coffee, sit back, and let's get started!\n\n---\n\n**Host:** First off, let's talk about the **Gmail Curator**. This handy agent is a must-have for anyone swamped with emails, and let's face it, that's most of us these days. The Gmail Curator is like having a personal assistant who knows your communication style and priorities. It uses GPT-4.1 and has web search capabilities, meaning it's constantly learning and adapting to your needs.\n\nThis agent primarily handles your inbox with finesse:\n\n1. **Email Classification:** It analyzes and classifies your emails based on personal categories like work, family, finance, and travel. This saves you time from manually sorting through countless messages.\n\n2. **Label Merging:** If you have overlapping or redundant labels, the agent smartly merges them into unified, clear categories, ensuring nothing falls through the cracks.\n\n3. **Inbox Management:** Once emails are labeled, it helps keep your inbox clean by archiving emails, reflecting your personal communication style.\n\nOne specific highlight of this agent is its ability to flag emails for manual review if context or labeling is ambiguous, ensuring you always stay in control. It's like having a super-organized co-pilot in your digital life!\n\n---\n\n**Host:** Next up, we have the **PR Diff Auditor**, which is perfect for code enthusiasts and developers. This agent is your go-to companion for efficient code review processes. Set up to run automatically with GitHub, it analyzes pull request diffs for potential issues and gives actionable feedback.\n\n**Main Capabilities:**\n\n- **Security Analysis:** It reveals potential vulnerabilities by detecting unsafe patterns and hidden secrets in your code, which is crucial for maintaining the integrity of your projects.\n  \n- **Code Quality Insights:** You get instant feedback on anti-patterns, technical debt, and maintainability issues. It’s like having a second set of eyes always watching out for best practices.\n\n- **Infrastructure Change Analysis:** Whether it's Terraform, Docker, or Kubernetes, this agent ensures infrastructure changes are risk-analyzed. \n\n- **Personalized Suggestions:** Based on your team's standards and conventions, it suggests improvements and points out areas for code enhancements.\n\nThis agent is an excellent example of how AI can not only automate repetitive tasks but also elevate the quality of output by providing sophisticated and intelligent analysis, all while seamlessly integrating into your existing workflow with tools like GitHub Actions and the OpenAI API.\n\n---\n\n**Host:** But wait, there's more! The AI world is vast, and continuing with our exploration, let's touch on the **Test Coverage Advisor**. For those of us working closely with code quality, this agent monitors test coverage trends over time and suggests improvements to boost code quality and reliability.\n\nIt highlights test areas by:\n\n- **Tracking Trends:** Always be in the know of how your test coverage stacks up against previous versions.\n- **Highlighting Gaps:** By pinpointing uncovered code segments, it tells you exactly where to focus your testing efforts.\n- **Suggesting Specific Tests:** It recommends test cases so you can improve coverage smartly, working smarter, not harder.\n\nPlus, it supports a wide range of coverage tools across different programming languages like JavaScript, Python, Java, and more, ensuring that it can fit into almost any development environment without a hitch.\n\n---\n\n**Host:** To wrap up, the power of personal AI agents like the Gmail Curator, PR Diff Auditor, and Test Coverage Advisor demonstrates the potential of AI to revolutionize the way we approach everyday tasks and professional responsibilities. Whether managing emails or improving code quality, these agents empower us to focus on creative and strategic endeavors, leaving routine tasks to our digital assistants.\n\nThank you for tuning in to this episode, and we hope you're inspired to leverage these AI agents to boost your productivity! Don't forget to subscribe for more insights on transforming your workflows with AI. Until next time, keep your tasks efficient and your emails sorted!"
+      role: assistant
+      step: episode
+      timestamp: "2025-07-06T11:07:49.484132-04:00"
+    - message: |+
+        Episode 4: Staying Secure with Your Personal AI
+
+        # Staying Secure with Your Personal AI
+
+        **[Intro Music Fades In]**
+
+        **Host:** Hello and welcome back to [Your Podcast Name], where we dive deep into the fascinating world of artificial intelligence. I’m [Host's Name], your host, and today, we’re talking about a critical aspect of AI deployment: security. Whether you're a developer deploying AI agents or using OpenAI APIs, keeping your systems secure is crucial. We’ll focus on important security precautions when using MCP servers and managing API tokens effectively. Let's jump right in!
+
+        **[Intro Music Fades Out]**
+
+        **Host:** In previous episodes, we've touched on the basics of AI deployment and some introductory concepts on data privacy. Today, we're building upon that by zeroing in on a couple of indispensable security measures: securing MCP servers and managing API tokens. If you've been following along, you'll recall how fundamental these components are in connecting your AI models to the wider world.
+
+        ## Securing MCP Servers
+
+        **Host:** First up, let's discuss securing your MCP servers. You've worked hard to build your AI models, and the last thing you want is for them to be compromised due to poor server security. Here are some key strategies:
+
+        1. **Start with Strong Authentication:** Ensure you're using two-factor authentication for accessing your servers. This adds an extra layer of security that makes it more challenging for unauthorized users to gain access.
+
+        2. **Regular Updates:** Keep your server software up-to-date. Software updates often include patches for vulnerabilities that could be exploited by hackers.
+
+        3. **Encryption is Essential:** Encrypt data both at rest and in transit. This means securing your stored data with strong encryption algorithms and ensuring that all data moving in and out of your server is encrypted using SSL/TLS protocols.
+
+        The goal is to make sure that even if someone manages to breach your server, they cannot easily decode the sensitive data being transmitted.
+
+        ## Managing API Tokens Effectively
+
+        **Host:** Moving on to API tokens, these are the keys to interfacing with your AI models, especially when using services like OpenAI's APIs. Mismanagement of these tokens can lead to unauthorized access, so here are some best practices:
+
+        1. **Use Unique Tokens:** Generate unique tokens for different applications or clients. This practice limits the scope of access and ensures that even if one token is compromised, not all your services are at risk.
+
+        2. **Restrict Token Permissions:** Only grant the minimum necessary permissions for each token. If a token only needs to read data, don't allow it write privileges.
+
+        3. **Rotate Tokens Regularly:** Like changing passwords regularly, rotating your API tokens is a good security measure. Regular rotation limits the impact of a compromised token.
+
+        4. **Monitor Usage:** Implement logging and monitoring to track the usage of your API tokens. This can help you quickly identify any suspicious activity.
+
+        ## Highlighting the Importance of Security in AI Deployment
+
+        **Host:** Why does all this matter? Well, the speed at which AI is advancing is breathtaking, but it also means threats are evolving just as quickly. Securing your infrastructure and managing your access points effectively are vital steps in protecting your AI applications and maintaining trust with your users.
+
+        Remember, a security breach not only affects your system's integrity but can also have long-term reputational damage. By prioritizing robust security measures, you're not just protecting your AI models—you're safeguarding the trust that users place in you.
+
+        ## Wrapping Up
+
+        **Host:** That's all for today's episode on staying secure with your personal AI. We've seen how crucial it is to secure your MCP servers and manage API tokens with vigilance. These proactive steps can save you time, stress, and the potential fallout from security breaches.
+
+        Please make sure to check out our previous episodes if you're looking to get more foundational insights into AI development. And stay tuned for our next episode, where we'll delve into optimizing AI performance post-deployment!
+
+        As always, thank you for tuning in to [Your Podcast Name]. Don’t forget to subscribe and leave us a review on your favorite podcast platform. Until next time, stay secure and keep innovating!
+
+        **[Outro Music Fades In]**
+
+        **Host:** Take care and goodbye!
+
+        **[Outro Music Fades Out]**
+
+      role: assistant
+      step: episode
+      timestamp: "2025-07-06T11:08:51.101980-04:00"
+    - message: |-
+        Episode 5: Conclusion and Next Steps in Your pAI Journey
+
+        # Conclusion and Next Steps in Your pAI Journey
+
+        Hello everyone, and welcome back to our podcast! I’m your host, [Your Name], and today we're wrapping up our exciting series on personal Artificial Intelligence, or pAI. It's been a fantastic journey so far, and I can't thank you enough for joining me on this adventure.
+
+        As we dive into our final episode, let’s take a moment to recap what we've discovered and discuss how you can continue exploring the fascinating world of pAI.
+
+        In our initial episodes, we delved into the basics of pAI: what it is, how it differs from other AI systems, and the immense potential it holds for personal and professional growth. We learned that personal AI is designed to assist individuals by understanding their unique preferences, habits, and goals. This technology is not just about automation; it’s about personalization and making technology work for you in a meaningful way.
+
+        We then moved on to explore the technological underpinnings of pAI, discussing machine learning models, data processing, and the ethical considerations that come with personal data usage. Our guests, who were experts in AI development and ethics, highlighted the importance of transparency, user consent, and the constant evolution of AI policies to ensure that personal data remains secure and private.
+
+        As our series progressed, we dived into real-world applications of pAI. From virtual personal assistants that help with daily tasks to AI systems that aid in personalized learning and mental health support, we’ve seen how versatile and transformative pAI can be. We also explored how businesses are harnessing the power of pAI to engage customers more effectively and tailor their offerings to individual needs.
+
+        In our penultimate episode, we focused on the future of pAI—how advancements in AI technologies are paving the way for even more sophisticated interactions. We discussed the potential integration of pAI in various industries, including healthcare, education, and customer service, and the exciting prospects of creating a personalized digital companion that grows and evolves with you.
+
+        So, what’s next in your pAI journey? The path of exploration doesn’t end here. Here are a few resources that can help you dive deeper:
+
+        1. **Online Courses**: Platforms like Coursera and edX offer specialized courses on AI and its applications. They can be a great starting point if you’re keen to understand more about the technical aspect of pAI.
+
+        2. **Community Forums**: Joining forums such as Reddit’s AI communities or specialized pAI groups can provide insights and updates, and you can connect with like-minded enthusiasts.
+
+        3. **Podcasts and Webinars**: Stay updated by following AI-focused podcasts or webinars hosted by industry experts and innovators. They often share the latest trends and developments.
+
+        4. **Books and Articles**: There are numerous publications available that delve into AI advancements and ethics. Books like "Artificial Intelligence: A Guide to Intelligent Systems" provide both foundational knowledge and future outlooks.
+
+        5. **Networking Events and Conferences**: Attending AI conferences and meetups can offer great opportunities for learning and networking with professionals in the field.
+
+        Before we sign off, I want to emphasize the importance of maintaining a curious mind and a responsible attitude towards the use of AI in our everyday lives. As exciting as these technologies are, they come with the responsibility to use them ethically and sustainably.
+
+        Thank you once again for being a part of this series on personal Artificial Intelligence. I hope you've found it as engaging and informative as I intended. Feel free to revisit the episodes anytime, and don’t hesitate to reach out with questions or share your own experiences with pAI. Keep learning, keep exploring, and until next time, stay curious about the amazing world of AI!
+
+        Goodbye for now!
+      role: assistant
+      step: episode
+      timestamp: "2025-07-06T11:09:46.836455-04:00"
+project_name: onboarding
+start_time: 2025-07-06T10:48:08.215748-04:00
