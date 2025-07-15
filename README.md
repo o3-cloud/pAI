@@ -40,6 +40,7 @@ mindmap
         Gmail Newsletter
         Test Agent
       @Work Context
+        Trae Agent
         PR Diff Auditor
         Test Coverage Advisor
 
@@ -47,6 +48,7 @@ mindmap
       Active Agents
         Gmail Curator
         Gmail Newsletter
+        Trae Agent
       Experimental
         Test Agent
         New Capabilities
@@ -129,6 +131,7 @@ The repository is organized into two main contexts:
 ### @Work - Professional Workflow Enhancement
 - **PR Diff Auditor**: Analyzes pull request diffs for security issues, code quality, and best practices
 - **Test Coverage Advisor**: Monitors test coverage trends and provides actionable testing recommendations
+- **Trae Agent**: AI-powered software engineering agent for general coding tasks (responds to @trae mentions)
 
 Each agent includes:
 - `Agentfile`: Agent configuration and metadata
@@ -196,13 +199,14 @@ Or deployed to GitHub Actions for automated scheduling.
 |-------|---------|--------|-------------|
 | Gmail Curator | @Home | ✅ Active | Monitors inbox for important emails, provides summaries |
 | Gmail Newsletter | @Home | ✅ Active | Processes newsletters, creates weekly digests |
+| Trae Agent | @Work | ✅ Active | AI-powered software engineering agent (responds to @trae mentions) |
 | PR Diff Auditor | @Work | 🚧 Planned | Analyzes PRs for security, quality, and best practices |
 | Test Coverage Advisor | @Work | 🚧 Planned | Monitors test coverage trends and suggests improvements |
 | Test Agent | @Home | 🧪 Experimental | Testing ground for new agent capabilities |
 
 ### 🔄 Architecture Patterns
 
-- **Trigger Types**: `schedule` (cron), `workflow_dispatch` (manual), `pull_request` (reactive)
+- **Trigger Types**: `schedule` (cron), `workflow_dispatch` (manual), `pull_request` (reactive), `@mentions` (Claude Code, Trae Agent)
 - **Autonomy Levels**:
   - **Informative**: Email summaries, coverage reports
   - **Suggestive**: PR comments with recommendations
