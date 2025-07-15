@@ -1,0 +1,147 @@
+name: Trae Agent Software Engineering
+
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: 'Software engineering task for trae-agent to execute'
+        required: true
+        type: string
+        default: 'Review the codebase and suggest improvements'
+      working_dir:
+        description: 'Working directory for the task'
+        required: false
+        type: string
+        default: '.'
+      max_steps:
+        description: 'Maximum number of steps for the agent'
+        required: false
+        type: string
+        default: '20'
+      provider:
+        description: 'LLM provider to use'
+        required: false
+        type: choice
+        default: 'openai'
+        options:
+          - openai
+          - anthropic
+          - google
+      model:
+        description: 'Model to use'
+        required: false
+        type: string
+        default: 'gpt-4o'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  run-trae-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          
+      - name: Install UV
+        uses: astral-sh/setup-uv@v6
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          
+      - name: Install Task
+        run: |
+          sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
+          
+      - name: Install Agentman
+        run: |
+          pip install agentman
+          
+      - name: Clone and setup trae-agent
+        run: |
+          git clone https://github.com/bytedance/trae-agent.git
+          cd trae-agent
+          uv venv
+          uv sync --all-extras
+          
+      - name: Prepare workspace
+        run: |
+          mkdir -p workspace
+          cp -r . workspace/
+          cd workspace
+          echo "${{ github.event.inputs.task }}" > task.txt
+          
+      - name: Create trae-agent config
+        run: |
+          cd workspace
+          cat > trae_config.json << EOF
+          {
+            "default_provider": "${{ github.event.inputs.provider }}",
+            "max_steps": ${{ github.event.inputs.max_steps }},
+            "model_providers": {
+              "openai": {
+                "api_key": "${{ secrets.OPENAI_API_KEY }}",
+                "model": "${{ github.event.inputs.model }}",
+                "temperature": 0.1,
+                "max_tokens": 4096
+              },
+              "anthropic": {
+                "api_key": "${{ secrets.ANTHROPIC_API_KEY }}",
+                "model": "claude-sonnet-4-20250514",
+                "temperature": 0.1,
+                "max_tokens": 4096
+              }
+            },
+            "tools": [
+              "str_replace_based_edit_tool",
+              "bash",
+              "sequential_thinking", 
+              "task_done",
+              "json_edit_tool"
+            ],
+            "trajectory_recorder": {
+              "enabled": true,
+              "output_dir": "./trajectories"
+            },
+            "lakeview": {
+              "enabled": true
+            }
+          }
+          EOF
+          
+      - name: Run trae-agent
+        run: |
+          cd trae-agent
+          source .venv/bin/activate
+          trae-cli run "${{ github.event.inputs.task }}" \
+            --working-dir "../workspace/${{ github.event.inputs.working_dir }}" \
+            --provider "${{ github.event.inputs.provider }}" \
+            --model "${{ github.event.inputs.model }}" \
+            --config "../workspace/trae_config.json"
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          
+      - name: Upload trajectories
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trae-agent-trajectories
+          path: workspace/trajectories/
+          retention-days: 7
+          
+      - name: Upload workspace changes
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: workspace-changes
+          path: workspace/
+          retention-days: 7

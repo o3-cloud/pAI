@@ -1,0 +1,26 @@
+{
+  "default_provider": "openai",
+  "max_steps": 20,
+  "model_providers": {
+    "openai": {
+      "api_key": "${OPENAI_API_KEY}",
+      "model": "gpt-4o",
+      "temperature": 0.1,
+      "max_tokens": 4096
+    }
+  },
+  "tools": [
+    "str_replace_based_edit_tool",
+    "bash",
+    "sequential_thinking",
+    "task_done",
+    "json_edit_tool"
+  ],
+  "trajectory_recorder": {
+    "enabled": true,
+    "output_dir": "/workspace/trajectories"
+  },
+  "lakeview": {
+    "enabled": true
+  }
+}

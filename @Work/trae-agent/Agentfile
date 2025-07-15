@@ -1,0 +1,22 @@
+FROM ghcr.io/o3-cloud/pai/base:latest
+MODEL gpt-4.1
+
+# Install trae-agent
+RUN git clone https://github.com/bytedance/trae-agent.git /opt/trae-agent && \
+    cd /opt/trae-agent && \
+    uv venv && \
+    uv sync --all-extras
+
+# Set up trae-agent configuration
+RUN mkdir -p /root/.config/trae-agent
+COPY trae_config.json /root/.config/trae-agent/
+
+# Define the agent
+AGENT trae_software_engineer
+INSTRUCTION You are a software engineering AI agent powered by trae-agent. You will receive software engineering tasks and execute them using trae-agent's capabilities. \
+Use the personal and work context provided to understand the codebase and requirements. \
+Tasks may include: code reviews, bug fixes, feature implementations, refactoring, testing, and documentation. \
+Always provide clear explanations of your changes and reasoning.
+SERVERS 
+
+CMD ["bash", "-c", "cd /opt/trae-agent && source .venv/bin/activate && trae-cli run \"$(cat /workspace/task.txt)\" --working-dir /workspace --provider openai --model gpt-4o"]

@@ -1,0 +1,25 @@
+version: 3
+tasks:
+  prompt:
+    - cat ../ME.md > prompt.txt
+  
+  setup-task:
+    - echo "{{.TASK}}" > task.txt
+    - mkdir -p trajectories
+  
+  trae-agent:
+    - agentman run --rm -e OPENAI_API_KEY=$OPENAI_API_KEY -v $(pwd):/workspace --from-agentfile -f Agentfile
+  
+  run:
+    - task: prompt
+    - task: setup-task
+    - task: trae-agent
+  
+  interactive:
+    desc: Run trae-agent in interactive mode
+    - cd /opt/trae-agent && source .venv/bin/activate && trae-cli interactive --provider openai --model gpt-4o
+  
+  clean:
+    desc: Clean up generated files
+    - rm -f prompt.txt task.txt
+    - rm -rf trajectories
