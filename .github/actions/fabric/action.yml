@@ -1,0 +1,179 @@
+name: 'Fabric CLI Wrapper'
+description: 'Execute Fabric AI patterns for content processing and analysis'
+author: 'pAI System'
+
+inputs:
+  pattern:
+    description: 'Fabric pattern to use (e.g., summarize, extract_wisdom, analyze_claims)'
+    required: true
+  content:
+    description: 'Direct text content to process'
+    required: false
+  input-file:
+    description: 'File path to process'
+    required: false
+  url:
+    description: 'URL to scrape and process'
+    required: false
+  youtube-url:
+    description: 'YouTube video URL to process'
+    required: false
+  output-file:
+    description: 'Output file path (defaults to stdout)'
+    required: false
+  model:
+    description: 'AI model to use'
+    required: false
+    default: 'gpt-4'
+  temperature:
+    description: 'Model temperature (0.0-2.0)'
+    required: false
+  stream:
+    description: 'Enable streaming output'
+    required: false
+    default: 'false'
+  variables:
+    description: 'Pattern variables in key=value format, separated by commas'
+    required: false
+  openai-api-key:
+    description: 'OpenAI API key'
+    required: false
+  anthropic-api-key:
+    description: 'Anthropic API key'
+    required: false
+  setup-patterns:
+    description: 'Whether to update/setup patterns from repository'
+    required: false
+    default: 'true'
+
+outputs:
+  result:
+    description: 'Processed content result'
+    value: ${{ steps.fabric-run.outputs.result }}
+  output-file:
+    description: 'Path to output file if created'
+    value: ${{ steps.fabric-run.outputs.output-file }}
+  pattern-used:
+    description: 'Pattern that was executed'
+    value: ${{ inputs.pattern }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install Fabric CLI
+      shell: bash
+      run: |
+        echo "Installing Fabric CLI..."
+        curl -L https://github.com/danielmiessler/fabric/releases/latest/download/fabric-linux-amd64 -o fabric
+        chmod +x fabric
+        sudo mv fabric /usr/local/bin/
+        fabric --version
+        echo "Fabric CLI installed successfully"
+
+    - name: Setup Fabric Configuration
+      shell: bash
+      env:
+        OPENAI_API_KEY: ${{ inputs.openai-api-key }}
+        ANTHROPIC_API_KEY: ${{ inputs.anthropic-api-key }}
+      run: |
+        echo "Setting up Fabric configuration..."
+        mkdir -p ~/.config/fabric
+        
+        # Create .env file with API keys
+        if [[ -n "$OPENAI_API_KEY" ]]; then
+          echo "OPENAI_API_KEY=$OPENAI_API_KEY" >> ~/.config/fabric/.env
+          echo "OpenAI API key configured"
+        fi
+        
+        if [[ -n "$ANTHROPIC_API_KEY" ]]; then
+          echo "ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY" >> ~/.config/fabric/.env
+          echo "Anthropic API key configured"
+        fi
+        
+        # Set file permissions
+        chmod 600 ~/.config/fabric/.env 2>/dev/null || true
+        
+        # Create config.yaml if model specified
+        if [[ "${{ inputs.model }}" != "gpt-4" ]] || [[ -n "${{ inputs.temperature }}" ]]; then
+          cat > ~/.config/fabric/config.yaml << EOF
+        model: ${{ inputs.model }}
+        EOF
+          if [[ -n "${{ inputs.temperature }}" ]]; then
+            echo "temperature: ${{ inputs.temperature }}" >> ~/.config/fabric/config.yaml
+          fi
+          echo "Custom configuration created"
+        fi
+
+    - name: Setup Fabric Patterns
+      shell: bash
+      if: inputs.setup-patterns == 'true'
+      run: |
+        echo "Setting up Fabric patterns..."
+        fabric --updatepatterns || echo "Patterns will be downloaded on first use"
+        echo "Pattern setup completed"
+
+    - name: Execute Fabric Pattern
+      id: fabric-run
+      shell: bash
+      run: |
+        echo "Executing Fabric pattern: ${{ inputs.pattern }}"
+        
+        # Build fabric command
+        FABRIC_CMD="fabric --pattern ${{ inputs.pattern }}"
+        
+        # Add model if specified and different from default
+        if [[ "${{ inputs.model }}" != "gpt-4" ]]; then
+          FABRIC_CMD="$FABRIC_CMD --model ${{ inputs.model }}"
+        fi
+        
+        # Add streaming if enabled
+        if [[ "${{ inputs.stream }}" == "true" ]]; then
+          FABRIC_CMD="$FABRIC_CMD --stream"
+        fi
+        
+        # Add variables if specified
+        if [[ -n "${{ inputs.variables }}" ]]; then
+          IFS=',' read -ra VARS <<< "${{ inputs.variables }}"
+          for var in "${VARS[@]}"; do
+            FABRIC_CMD="$FABRIC_CMD -v=\"$var\""
+          done
+        fi
+        
+        # Add output file if specified
+        if [[ -n "${{ inputs.output-file }}" ]]; then
+          FABRIC_CMD="$FABRIC_CMD --output ${{ inputs.output-file }}"
+          echo "output-file=${{ inputs.output-file }}" >> $GITHUB_OUTPUT
+        fi
+        
+        # Handle different input types
+        if [[ -n "${{ inputs.content }}" ]]; then
+          # Direct content input
+          echo "Processing direct content input"
+          RESULT=$(echo "${{ inputs.content }}" | $FABRIC_CMD)
+        elif [[ -n "${{ inputs.input-file }}" ]]; then
+          # File input
+          echo "Processing file: ${{ inputs.input-file }}"
+          RESULT=$($FABRIC_CMD < "${{ inputs.input-file }}")
+        elif [[ -n "${{ inputs.url }}" ]]; then
+          # URL input
+          echo "Processing URL: ${{ inputs.url }}"
+          RESULT=$($FABRIC_CMD -u "${{ inputs.url }}")
+        elif [[ -n "${{ inputs.youtube-url }}" ]]; then
+          # YouTube URL input
+          echo "Processing YouTube URL: ${{ inputs.youtube-url }}"
+          RESULT=$($FABRIC_CMD -y "${{ inputs.youtube-url }}")
+        else
+          echo "Error: No input provided. Specify content, input-file, url, or youtube-url"
+          exit 1
+        fi
+        
+        # Set output (only if not writing to file)
+        if [[ -z "${{ inputs.output-file }}" ]]; then
+          {
+            echo 'result<<EOF'
+            echo "$RESULT"
+            echo 'EOF'
+          } >> $GITHUB_OUTPUT
+        fi
+        
+        echo "Fabric pattern execution completed successfully"

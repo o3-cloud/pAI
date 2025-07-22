@@ -1,0 +1,129 @@
+# Example: Enhanced Agent Workflow with Fabric Integration
+# This shows how to add Fabric processing to existing pAI agents
+
+name: Enhanced Gmail Curator with Fabric
+permissions:
+  contents: read
+
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        required: true
+        type: string
+    secrets:
+      GMAIL_AUTH_KEYS:
+        required: true
+      GMAIL_CREDS:
+        required: true
+      OPENAI_API_KEY:
+        required: true
+
+jobs:
+  enhanced-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Set up Python
+        run: uv python install
+
+      - name: Install Task runner
+        run: |
+          sudo sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
+
+      - name: Install Agentman
+        run: |
+          uv tool install git+https://github.com/AgentO3/agentman.git@main#egg=agentman-mcp
+
+      - name: Set up Gmail MCP credentials
+        env:
+          GMAIL_AUTH_KEYS: ${{ secrets.GMAIL_AUTH_KEYS }}
+          GMAIL_CREDS: ${{ secrets.GMAIL_CREDS }}
+        run: |
+          mkdir -p ~/.gmail-mcp
+          echo "${GMAIL_AUTH_KEYS}" > ~/.gmail-mcp/gcp-oauth.keys.json
+          echo "${GMAIL_CREDS}" > ~/.gmail-mcp/credentials.json
+          chmod 600 ~/.gmail-mcp/gcp-oauth.keys.json ~/.gmail-mcp/credentials.json
+          echo "Gmail MCP credentials configured"
+
+      # NEW: Pre-process emails with Fabric before agent runs
+      - name: Fetch Recent Emails
+        working-directory: ${{ inputs.working-directory }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          # This would be a custom script that fetches emails
+          # and saves them to a temporary file for Fabric processing
+          echo "Fetching recent emails for analysis..."
+          # mkdir -p temp && echo "Sample email content..." > temp/recent_emails.txt
+
+      # Analyze emails with Fabric for key insights
+      - name: Extract Email Insights
+        uses: ./.github/actions/fabric
+        id: email-insights
+        with:
+          pattern: extract_wisdom
+          input-file: temp/recent_emails.txt
+          variables: "focus=actionable_items,format=bullet_points"
+          output-file: temp/email_insights.md
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      # Summarize important emails
+      - name: Summarize Important Emails  
+        uses: ./.github/actions/fabric
+        id: email-summary
+        with:
+          pattern: summarize
+          input-file: temp/recent_emails.txt
+          variables: "length=brief,style=professional"
+          output-file: temp/email_summary.md
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      # Run the original agent with enhanced context
+      - name: Run Enhanced Gmail Curator
+        working-directory: ${{ inputs.working-directory }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          FABRIC_INSIGHTS: ${{ steps.email-insights.outputs.result }}
+          FABRIC_SUMMARY: ${{ steps.email-summary.outputs.result }}
+        run: |
+          # Add Fabric insights to agent context
+          echo "## Fabric Analysis" >> prompt.txt
+          echo "$FABRIC_INSIGHTS" >> prompt.txt
+          echo "## Email Summary" >> prompt.txt  
+          echo "$FABRIC_SUMMARY" >> prompt.txt
+          
+          # Run the agent
+          task run
+
+      # POST: Process agent output with Fabric
+      - name: Create Action Items
+        uses: ./.github/actions/fabric
+        if: always()
+        with:
+          pattern: extract_ideas
+          input-file: temp/agent_output.log
+          variables: "format=checklist,priority=high"
+          output-file: temp/action_items.md
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      # Optional: Commit results to repository
+      - name: Commit Analysis Results
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          mkdir -p analysis/$(date +%Y-%m-%d)
+          cp temp/*.md analysis/$(date +%Y-%m-%d)/
+          
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git add analysis/
+            git commit -m "feat: automated email analysis $(date +%Y-%m-%d)"
+            # git push origin main  # Uncomment if you want to push
+          fi

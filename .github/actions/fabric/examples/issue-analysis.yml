@@ -1,0 +1,251 @@
+# Example: Automated Issue Analysis with Fabric
+# This workflow demonstrates using Fabric to analyze GitHub issues, PRs, and code changes
+
+name: Automated Issue Analysis
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+on:
+  issues:
+    types: [opened, edited]
+  pull_request:
+    types: [opened, edited, synchronize]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue number to analyze'
+        required: false
+        type: string
+      pr_number:
+        description: 'PR number to analyze'
+        required: false  
+        type: string
+
+jobs:
+  analyze-issue:
+    if: github.event_name == 'issues' || (github.event_name == 'workflow_dispatch' && github.event.inputs.issue_number)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get Issue Content
+        id: issue-content
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ISSUE_NUM="${{ github.event.issue.number || github.event.inputs.issue_number }}"
+          
+          # Get issue details
+          gh issue view $ISSUE_NUM --json title,body,labels,author > issue_data.json
+          
+          # Extract content for analysis
+          echo "TITLE=$(jq -r '.title' issue_data.json)" >> $GITHUB_ENV
+          echo "AUTHOR=$(jq -r '.author.login' issue_data.json)" >> $GITHUB_ENV
+          jq -r '.body' issue_data.json > issue_body.txt
+
+      # Analyze the issue for complexity and priority
+      - name: Analyze Issue Complexity
+        uses: ./.github/actions/fabric
+        id: complexity-analysis
+        with:
+          pattern: analyze_claims
+          input-file: issue_body.txt
+          variables: "focus=technical_complexity,confidence=high"
+          output-file: complexity_analysis.md
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      # Extract actionable tasks from the issue
+      - name: Extract Tasks from Issue
+        uses: ./.github/actions/fabric  
+        id: task-extraction
+        with:
+          pattern: extract_ideas
+          input-file: issue_body.txt
+          variables: "format=checklist,type=actionable_tasks"
+          output-file: extracted_tasks.md
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      # Generate implementation suggestions
+      - name: Generate Implementation Suggestions
+        uses: ./.github/actions/fabric
+        id: implementation-suggestions
+        with:
+          pattern: create_coding_feature
+          content: |
+            Issue Title: ${{ env.TITLE }}
+            Issue Description: $(cat issue_body.txt)
+          variables: "approach=step_by_step,consideration=best_practices"
+          output-file: implementation_suggestions.md
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      # Comment on the issue with analysis
+      - name: Comment Analysis on Issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ISSUE_NUM="${{ github.event.issue.number || github.event.inputs.issue_number }}"
+          
+          cat > analysis_comment.md << EOF
+          ## 🤖 Automated Issue Analysis
+          
+          Thanks for creating this issue, @${{ env.AUTHOR }}! I've analyzed the content and here's what I found:
+          
+          ### 📊 Complexity Analysis
+          $(cat complexity_analysis.md)
+          
+          ### ✅ Extracted Tasks
+          $(cat extracted_tasks.md)
+          
+          ### 💡 Implementation Suggestions  
+          $(cat implementation_suggestions.md)
+          
+          ---
+          *This analysis was generated automatically using Fabric AI patterns. Please review and adjust as needed.*
+          EOF
+          
+          gh issue comment $ISSUE_NUM --body-file analysis_comment.md
+
+  analyze-pr:
+    if: github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && github.event.inputs.pr_number)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get PR Details
+        id: pr-details
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_NUM="${{ github.event.pull_request.number || github.event.inputs.pr_number }}"
+          
+          # Get PR details
+          gh pr view $PR_NUM --json title,body,author,additions,deletions > pr_data.json
+          
+          # Get the diff
+          gh pr diff $PR_NUM > pr_changes.diff
+          
+          echo "TITLE=$(jq -r '.title' pr_data.json)" >> $GITHUB_ENV
+          echo "AUTHOR=$(jq -r '.author.login' pr_data.json)" >> $GITHUB_ENV
+          echo "ADDITIONS=$(jq -r '.additions' pr_data.json)" >> $GITHUB_ENV
+          echo "DELETIONS=$(jq -r '.deletions' pr_data.json)" >> $GITHUB_ENV
+          
+          jq -r '.body // "No description provided"' pr_data.json > pr_body.txt
+
+      # Analyze code changes  
+      - name: Analyze Code Changes
+        uses: ./.github/actions/fabric
+        id: code-analysis
+        with:
+          pattern: analyze_code_changes
+          input-file: pr_changes.diff
+          variables: "focus=security_and_performance,depth=detailed"
+          output-file: code_analysis.md
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      # Extract potential issues
+      - name: Identify Potential Issues
+        uses: ./.github/actions/fabric
+        id: issue-identification
+        with:
+          pattern: analyze_claims
+          input-file: pr_changes.diff
+          variables: "focus=bugs_and_vulnerabilities,confidence=medium_high"
+          output-file: potential_issues.md
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      # Suggest improvements
+      - name: Suggest Improvements
+        uses: ./.github/actions/fabric
+        id: improvements
+        with:
+          pattern: improve_writing
+          input-file: code_analysis.md
+          variables: "focus=code_quality,style=constructive_feedback"
+          output-file: improvement_suggestions.md
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      # Generate test suggestions
+      - name: Generate Test Suggestions
+        uses: ./.github/actions/fabric
+        id: test-suggestions
+        with:
+          pattern: create_coding_feature
+          content: |
+            PR Title: ${{ env.TITLE }}
+            PR Description: $(cat pr_body.txt)
+            Code Changes: $(head -50 pr_changes.diff)
+          variables: "focus=testing_strategy,type=unit_tests"
+          output-file: test_suggestions.md
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      # Comment comprehensive analysis on PR
+      - name: Comment Analysis on PR  
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_NUM="${{ github.event.pull_request.number || github.event.inputs.pr_number }}"
+          
+          cat > pr_analysis_comment.md << EOF
+          ## 🔍 Automated Code Review Analysis
+          
+          Great work on this PR, @${{ env.AUTHOR }}! Here's my automated analysis:
+          
+          ### 📈 Change Summary
+          - **Lines Added**: ${{ env.ADDITIONS }}
+          - **Lines Deleted**: ${{ env.DELETIONS }}
+          
+          ### 🔬 Code Analysis
+          $(cat code_analysis.md)
+          
+          ### ⚠️ Potential Issues to Review
+          $(cat potential_issues.md)
+          
+          ### 💡 Improvement Suggestions
+          $(cat improvement_suggestions.md)
+          
+          ### 🧪 Testing Recommendations
+          $(cat test_suggestions.md)
+          
+          ---
+          *This analysis was generated using Fabric AI patterns. Please review the suggestions and use your judgment for implementation.*
+          
+          **Next Steps:**
+          - [ ] Review identified potential issues
+          - [ ] Consider implementing suggested improvements  
+          - [ ] Add recommended tests if applicable
+          - [ ] Run existing test suite to ensure no regressions
+          EOF
+          
+          gh pr comment $PR_NUM --body-file pr_analysis_comment.md
+
+      # Create a summary for the team
+      - name: Create Analysis Summary
+        run: |
+          mkdir -p analysis/pr-reviews/
+          
+          cat > analysis/pr-reviews/pr-${{ github.event.pull_request.number || github.event.inputs.pr_number }}-$(date +%Y%m%d).md << EOF
+          # PR Analysis Summary
+          
+          **PR**: #${{ github.event.pull_request.number || github.event.inputs.pr_number }} - ${{ env.TITLE }}
+          **Author**: ${{ env.AUTHOR }}  
+          **Date**: $(date)
+          **Changes**: +${{ env.ADDITIONS }}/-${{ env.DELETIONS }}
+          
+          ## Analysis Files
+          - [Code Analysis](../../code_analysis.md)
+          - [Potential Issues](../../potential_issues.md) 
+          - [Improvement Suggestions](../../improvement_suggestions.md)
+          - [Test Suggestions](../../test_suggestions.md)
+          
+          ## Automated Review Status
+          ✅ Analysis completed successfully
+          EOF
+          
+          # Optional: commit analysis to repository for historical tracking
+          # git add analysis/ && git commit -m "feat: PR analysis for #$PR_NUM" && git push
