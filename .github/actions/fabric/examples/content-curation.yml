@@ -1,0 +1,189 @@
+# Example: Content Curation Workflow with Fabric
+# This demonstrates using Fabric for automated content processing and curation
+
+name: Automated Content Curation
+permissions:
+  contents: write
+
+on:
+  schedule:
+    # Run daily at 9:00 AM UTC
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: 'Comma-separated URLs to analyze'
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  content-curation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Process multiple articles from various sources
+      - name: Analyze Tech News Article
+        uses: ./.github/actions/fabric
+        id: tech-analysis
+        with:
+          pattern: extract_wisdom
+          url: "https://techcrunch.com/latest"
+          variables: "focus=innovation,depth=summary"
+          output-file: temp/tech_insights.md
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Analyze AI Research Paper
+        uses: ./.github/actions/fabric
+        id: research-analysis
+        with:
+          pattern: analyze_paper
+          url: "https://arxiv.org/abs/latest-ai-paper"
+          variables: "section=abstract,findings=key_contributions"
+          output-file: temp/research_summary.md
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      # Process user-provided URLs if any
+      - name: Process Custom URLs
+        if: github.event.inputs.urls != ''
+        uses: ./.github/actions/fabric
+        id: custom-analysis
+        with:
+          pattern: summarize
+          url: ${{ github.event.inputs.urls }}
+          variables: "style=newsletter,length=brief"
+          output-file: temp/custom_content.md
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      # Analyze trending YouTube content
+      - name: Analyze Tech YouTube Video
+        uses: ./.github/actions/fabric
+        id: youtube-analysis
+        with:
+          pattern: extract_insights
+          youtube-url: "https://youtube.com/watch?v=tech-trend-video"
+          variables: "format=bullet_points,focus=practical_applications"
+          output-file: temp/youtube_insights.md
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      # Combine all analyses into a comprehensive report
+      - name: Create Comprehensive Report
+        run: |
+          mkdir -p reports/$(date +%Y-%m-%d)
+          
+          cat > reports/$(date +%Y-%m-%d)/daily_curation.md << EOF
+          # Daily Content Curation Report - $(date +%Y-%m-%d)
+          
+          Generated automatically using Fabric AI patterns.
+          
+          ## Tech Industry Insights
+          $(cat temp/tech_insights.md 2>/dev/null || echo "No tech insights available")
+          
+          ## Research Highlights  
+          $(cat temp/research_summary.md 2>/dev/null || echo "No research summary available")
+          
+          ## Video Analysis
+          $(cat temp/youtube_insights.md 2>/dev/null || echo "No video analysis available")
+          
+          ## Custom Content Analysis
+          $(cat temp/custom_content.md 2>/dev/null || echo "No custom content processed")
+          
+          ---
+          *Generated with Fabric AI patterns on $(date)*
+          EOF
+
+      # Generate executive summary of all content
+      - name: Create Executive Summary
+        uses: ./.github/actions/fabric
+        with:
+          pattern: create_summary
+          input-file: reports/$(date +%Y-%m-%d)/daily_curation.md
+          variables: "length=executive,style=professional,focus=key_trends"
+          output-file: reports/$(date +%Y-%m-%d)/executive_summary.md
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      # Extract actionable items for follow-up
+      - name: Extract Action Items
+        uses: ./.github/actions/fabric
+        with:
+          pattern: extract_ideas
+          input-file: reports/$(date +%Y-%m-%d)/daily_curation.md
+          variables: "format=todo_list,priority=actionable"
+          output-file: reports/$(date +%Y-%m-%d)/action_items.md
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      # Create trend analysis
+      - name: Analyze Content Trends
+        uses: ./.github/actions/fabric
+        with:
+          pattern: analyze_claims
+          input-file: reports/$(date +%Y-%m-%d)/daily_curation.md  
+          variables: "focus=emerging_trends,confidence=high"
+          output-file: reports/$(date +%Y-%m-%d)/trend_analysis.md
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      # Generate newsletter-ready content
+      - name: Create Newsletter Content
+        uses: ./.github/actions/fabric
+        with:
+          pattern: improve_writing
+          input-file: reports/$(date +%Y-%m-%d)/executive_summary.md
+          variables: "style=newsletter,tone=engaging,audience=tech_professionals"
+          output-file: reports/$(date +%Y-%m-%d)/newsletter.md
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+
+      # Commit the curated content
+      - name: Commit Curated Content
+        run: |
+          git config user.name "Content Curator Bot"
+          git config user.email "curator-bot@pai-system.local"
+          
+          git add reports/
+          
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git commit -m "feat: automated content curation $(date +%Y-%m-%d)
+
+            Daily content curation including:
+            - Tech industry insights
+            - Research paper analysis  
+            - Video content analysis
+            - Executive summary and action items
+            - Trend analysis
+            - Newsletter-ready content
+            
+            Generated with Fabric AI patterns"
+            
+            git push origin main
+            echo "✅ Content curation completed and committed"
+          else
+            echo "ℹ️ No new content to commit"
+          fi
+
+      # Create issue for manual review if needed
+      - name: Create Review Issue
+        uses: actions/github-script@v7
+        if: failure()
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Content Curation Failed - ${new Date().toISOString().split('T')[0]}`,
+              body: `The automated content curation workflow failed. Please review the logs and processed content.
+              
+              **Date**: ${new Date().toISOString().split('T')[0]}
+              **Workflow**: ${context.workflow}
+              **Run ID**: ${context.runId}
+              
+              [View workflow run](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`,
+              labels: ['automation', 'content-curation', 'needs-review']
+            })
+
+      # Clean up temporary files
+      - name: Cleanup
+        if: always()
+        run: |
+          rm -rf temp/
+          echo "🧹 Temporary files cleaned up"
