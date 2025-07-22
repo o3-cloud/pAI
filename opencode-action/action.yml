@@ -1,0 +1,45 @@
+name: 'OpenCode AI Assistant'
+description: 'AI-powered assistant for GitHub Issues and Pull Requests with multi-provider support'
+author: 'pAI Team'
+
+branding:
+  icon: 'code'
+  color: 'blue'
+
+inputs:
+  api_key:
+    description: 'API key for the AI provider (OpenAI for MVP)'
+    required: true
+  model:
+    description: 'AI model to use'
+    required: false
+    default: 'gpt-4'
+  provider:
+    description: 'AI provider (openai for MVP, future: anthropic, etc.)'
+    required: false
+    default: 'openai'
+  max_turns:
+    description: 'Maximum number of conversation turns'
+    required: false
+    default: '3'
+  trigger_phrase:
+    description: 'Phrase to trigger the action'
+    required: false
+    default: '@opencode'
+  allowed_tools:
+    description: 'Tools that the AI can use (comma-separated)'
+    required: false
+    default: 'code_review,suggestions'
+  github_token:
+    description: 'GitHub token for API access'
+    required: true
+
+outputs:
+  comment_id:
+    description: 'ID of the comment created or updated'
+  status:
+    description: 'Status of the action execution'
+
+runs:
+  using: 'node20'
+  main: 'src/index.js'
