@@ -1,0 +1,151 @@
+base:
+  image: ghcr.io/o3-cloud/pai/base:latest
+  model: gpt-4.1-nano
+
+mcp_servers:
+- name: slack
+  command:
+  args:
+
+- name: filesystem
+  command: npx
+  args:
+  - '@modelcontextprotocol/server-filesystem'
+  - /workspace
+
+agents:
+- name: list_channels
+  model: gpt-4.1-nano
+  instruction: Extract a list of slack channels team channels and start date.
+  output_format:
+    type: json_schema
+    schema:
+      type: object
+      properties:
+        start_date:
+          type: string
+          description: "Start date formatted as %Y-%m-%d"
+        channels:
+          type: array
+          items:
+            type: string
+          description: Slack channel names
+      required: [channels, start_date]
+
+- name: search_channels
+  model: gpt-4.1-mini
+  instruction: |
+    Search slack channels after START_DATE
+  output_format:
+    type: json_schema
+    schema:
+      type: object
+      properties:
+        messages:
+          description: "List of messages from the channels"
+          type: array
+          items:
+            type: object
+            description: "Slack message details"
+            properties:
+              channel: 
+                description: "Name of the Slack channel"
+                type: string
+              user_name:
+                description: "Name of the user who sent the message"
+                type: string
+              text:
+                description: "The text content of the message"
+                type: string
+              permalink:
+                description: "Link to the message in Slack"
+                type: string
+      required: [messages]
+  servers:
+  - slack
+
+- name: save_channels
+  model: gpt-4.1-mini
+  instruction: Write the Slack data /workspace/tmp/slack.json file  
+  servers:
+  - filesystem
+
+- name: action_items
+  model: gpt-4.1
+  instruction: |
+    Suggested action items or next steps based on the documents content
+    Present your response in clearly labeled sections. For each fact, insight, or
+    recommendation, include a citation from the document (e.g., line number, section
+    title, permalink, or quote). Ensure each suggestion is grounded in the text. If parts of
+    the document are unclear or speculative, flag them. If information is insufficient,
+    state I don't know. Avoid making assumptions not supported by the document. 
+
+    Write this to the /workspace/tmp/action-items.md file.
+  servers:
+  - filesystem
+
+- name: considerations
+  model: gpt-4.1
+  instruction: |
+    What am I not considering?
+    Write this to the /workspace/tmp/considerations.md file.
+  servers:
+  - filesystem
+
+- name: clarifications
+  model: gpt-4.1
+  instruction: |
+    Is anything unclear or needs more context? Ask me clarifying questions.
+    Write this to the /workspace/tmp/clarifications.md file.
+  servers:
+  - filesystem
+  
+- name: summarize
+  instruction: |
+    Summarize the slack conver
+    Write this to the /workspace/tmp/summarize.md file.
+  servers:
+  - filesystem
+  model: gpt-4.1
+
+- name: report
+  instruction: |
+    Create a report of the findings.
+    Write this to the /workspace/tmp/report.md file.
+  servers:
+  - filesystem
+  model: gpt-4.1
+
+chains:
+- name: research
+  sequence:
+  - list_channels
+  - search_channels
+  - parallels
+- name: track_pipeline
+  sequence:
+
+parallels:
+- name: parallels
+  include_request: false
+  fan_out:
+  - action_items
+  - save_channels
+  - analyze
+
+- name: analyze
+  include_request: false
+  fan_in: report
+  fan_out:
+  - summarize
+  - next_steps
+  - clarifications
+  - considerations
+  
+command:
+- python
+- agent.py
+- -p
+- prompt.txt
+- --agent
+- research

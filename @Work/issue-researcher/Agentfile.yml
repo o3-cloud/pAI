@@ -1,0 +1,144 @@
+base:
+  image: ghcr.io/o3-cloud/pai/base:latest
+  model: gpt-4.1-nano
+
+mcp_servers:
+- name: datetime
+  command: uvx
+  args:
+  - mcp-server-time
+
+- name: filesystem
+  command: npx
+  args:
+  - '@modelcontextprotocol/server-filesystem'
+  - /workspace
+
+- name: github
+  command: /workspace/bin/github-mcp-server
+  args:
+  - --toolsets
+  - context,actions,issues,pull_requests
+  - stdio
+  env:
+    GITHUB_PERSONAL_ACCESS_TOKEN: ${GITHUB_PERSONAL_ACCESS_TOKEN}
+
+- name: websearch
+  command:
+  args:
+
+agents:
+- name: shortcut_ticket_to_story_schema
+  model: gpt-4.1-mini
+  instruction: |
+    Convert a Shortcut ticket into the Story Schema. 
+    Extract all relevant fields from the Shortcut ticket, 
+    including comments and pull requests if available. 
+    Ensure the output matches the provided JSON schema exactly.
+  output_format:
+    type: json_schema
+    schema:
+      type: object
+      properties:
+        permalink:
+          type: string
+          description: Direct link to story
+        description:
+          type: string
+          description: Detailed story requirements
+        title:
+          type: string
+          description: Story title
+        state:
+          type: string 
+          description: Current story state
+        comments:
+          type: array
+          description: Story comments and updates
+          items:
+            type: string
+            description: content
+        pull_requests:
+          type: array
+          description: Pull requests
+          items:
+            type: object
+            properties:
+              link:
+                type: string
+                description: Link to pull request
+              status:
+                type: string
+                description: Pull request status
+  servers:
+    - github
+
+- name: research_github
+  model: gpt-4.1-mini
+  instruction: |
+    Research related content from Github.
+  servers:
+  - github
+
+- name: research_web
+  model: gpt-4.1-mini
+  instruction: |
+    Research the web for related.
+  servers:
+  - websearch
+
+- name: summarize
+  model: gpt-4.1
+  instruction: |
+    Summarize your findings into a concise report.
+
+- name: next_steps
+  model: gpt-4.1
+  instruction: |
+    What should I do next?
+
+- name: considerations
+  model: gpt-4.1
+  instruction: |
+    What am I not thinking about or considering?
+
+- name: final_report
+  model: gpt-4.1
+  instruction: |
+    Compose a final report of the findings. 
+    Write the report to /workspace/tmp/report.md
+    Open an issue in gamechanger/pai-owen and add the report as the description.
+  servers:
+  - filesystem
+  - github
+
+chains:
+- name: research
+  sequence:
+  - shortcut_ticket_to_story_schema
+  - fan_out_research
+parallels:
+
+- name: fan_out_research
+  include_request: false
+  fan_in: anaylize
+  fan_out:
+  - research_github
+  - research_web
+
+- name: anaylize
+  include_request: false
+  fan_in: final_report
+  fan_out:
+  - summarize
+  - next_steps
+  - considerations
+
+command:
+- python
+- agent.py
+- -p
+- prompt.txt
+- --agent
+- research
+

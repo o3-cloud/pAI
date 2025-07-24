@@ -1,0 +1,36 @@
+version: 3
+dotenv: [../../../.env]
+tasks:
+  context:
+    desc: Gather context for the agent
+    cmds:
+    - cat ../../../ME.md > prompt.txt
+    - |
+      START_DATE=$(date -d "2 days ago" +"%Y-%m-%d")
+      echo "" >> prompt.txt
+      echo "" >> prompt.txt
+      echo "START_DATE is ${START_DATE}" >> prompt.txt
+  chat:
+    desc: Run the agent to generate the newsletter
+    cmds:
+    - |
+      agentman run -i --rm -v $PWD:/workspace \
+      -e OPENAI_API_KEY \
+      --from-agentfile -f Agentfile.yml -- --agent grounded_context
+  agent:
+    desc: Run the agent to generate the newsletter
+    cmds:
+    - |
+      agentman run --rm -v $PWD:/workspace \
+      -e OPENAI_API_KEY \
+      --from-agentfile -f Agentfile.yml
+  cleanup:
+    cmds:
+    - |
+      
+  run:
+    desc: Run the entire task sequence
+    cmds:
+    - task: context
+    - task: agent
+    - task: cleanup

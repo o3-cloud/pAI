@@ -1,0 +1,24 @@
+version: 3
+dotenv: [../../../.env]
+vars:
+  ISSUE_URL: 
+tasks:
+  context:
+    desc: Gather context for the agent
+    cmds:
+    - |
+      echo "ISSUE_URL: {{.ISSUE_URL}}" > prompt.txt
+  agent:
+    desc: Run the agent to generate the newsletter
+    cmds:
+    - |
+      agentman run -i --rm -v $PWD:/workspace \
+      -e OPENAI_API_KEY \
+      -e SHORTCUT_API_TOKEN \
+      -e GITHUB_PERSONAL_ACCESS_TOKEN \
+      --from-agentfile -f Agentfile.yml
+  run:
+    desc: Run the entire task sequence
+    cmds:
+    - task: context
+    - task: agent
