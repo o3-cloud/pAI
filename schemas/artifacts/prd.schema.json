@@ -1,0 +1,83 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "ProductRequirementsDocument",
+    "type": "object",
+    "properties": {
+        "product_name": {
+            "type": "string",
+            "description": "Name of the product."
+        },
+        "overview": {
+            "type": "string",
+            "description": "Brief overview of the product."
+        },
+        "objectives": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "List of product objectives."
+        },
+        "features": {
+            "type": "array",
+            "description": "List of product features.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Feature name."
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Feature description."
+                    },
+                    "priority": {
+                        "type": "string",
+                        "enum": [
+                            "High",
+                            "Medium",
+                            "Low"
+                        ],
+                        "description": "Feature priority."
+                    },
+                    "acceptance_criteria": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Acceptance criteria for the feature."
+                    }
+                },
+                "required": [
+                    "name",
+                    "description"
+                ]
+            }
+        },
+        "stakeholders": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "List of stakeholders."
+        },
+        "timeline": {
+            "type": "string",
+            "description": "Project timeline or key milestones."
+        },
+        "metrics": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Success metrics for the product."
+        }
+    },
+    "required": [
+        "product_name",
+        "overview",
+        "objectives",
+        "features"
+    ]
+}

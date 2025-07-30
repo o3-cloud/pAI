@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WeeklyStatusDigest",
+  "type": "object",
+  "properties": {
+    "period": { "type": "string", "description": "Week or date range covered by the digest." },
+    "highlights": { "type": "array", "items": { "type": "string" }, "description": "Key highlights for the week." },
+    "blockers": { "type": "array", "items": { "type": "string" }, "description": "List of blockers encountered during the week." },
+    "metrics": { "type": "object", "additionalProperties": { "type": "number" }, "description": "Metrics tracked for the week." },
+    "trends": { "type": "string", "description": "Trends observed during the week." }
+  },
+  "required": ["period", "highlights"]
+}

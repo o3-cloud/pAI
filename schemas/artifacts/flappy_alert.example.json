@@ -1,0 +1,32 @@
+{
+  "artifact_name": "Flappy Alert Report",
+  "artifact_purpose": "Summarize and analyze a flappy/noisy alert to guide improvements in monitoring configuration and reduce alert fatigue.",
+  "artifact_audience": "SREs, on-call engineers, and monitoring owners",
+  "alert_summary": {
+    "monitor_name": "Eden Staging 5xx Rate is Elevated",
+    "condition": "min(last_5m):sum:eden.requests{http_range:5xx,service:eden,env:staging}.as_count() / sum:eden.requests{service:eden,env:staging}.as_count() > 0.04",
+    "trigger_value": 0.125,
+    "recovery_value": 0.0,
+    "alert_links": [
+      "https://datadog.example.com/alert/eden-staging-5xx-triggered",
+      "https://datadog.example.com/alert/eden-staging-5xx-recovered"
+    ]
+  },
+  "analysis": {
+    "flap_reason": "The alert uses min(last_5m) aggregation, making it sensitive to short-lived spikes. Rapid trigger and recovery indicate flapping.",
+    "impact": "Frequent, non-actionable alerts may cause alert fatigue and reduce trust in monitoring."
+  },
+  "recommendations": [
+    "Switch aggregation from min(last_5m) to avg(last_5m) or increase window size.",
+    "Enable require_full_window: true.",
+    "Reevaluate if a 4% threshold is appropriate for staging.",
+    "Use muting schedules during known noisy periods.",
+    "Group by tags to isolate spikes to specific deployments or instances."
+  ],
+  "next_actions": [
+    "Review current Datadog monitor configuration.",
+    "Test updated threshold and window settings.",
+    "Solicit feedback from engineering on alert actionability."
+  ],
+  "feedback_mechanism": "Slack thread replies and emoji reactions feed improvement loop."
+}

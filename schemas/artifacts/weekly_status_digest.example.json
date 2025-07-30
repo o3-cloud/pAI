@@ -1,0 +1,6 @@
+{
+  "week": "2025-W31",
+  "summary": "Completed migration to new server.",
+  "highlights": ["Zero downtime", "Improved performance"],
+  "blockers": ["Pending SSL certificate"]
+}

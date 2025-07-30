@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RetroSummary",
+  "type": "object",
+  "properties": {
+    "what_worked": { "type": "array", "items": { "type": "string" }, "description": "Things that worked well during the period." },
+    "what_didnt": { "type": "array", "items": { "type": "string" }, "description": "Things that did not work well during the period." },
+    "actions": { "type": "array", "items": { "type": "string" }, "description": "Action items identified for improvement." }
+  },
+  "required": ["what_worked", "what_didnt"]
+}

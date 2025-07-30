@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MarketLandscapeBrief",
+  "type": "object",
+  "properties": {
+    "trends": { "type": "string", "description": "Description of current market trends." },
+    "opportunities": { "type": "string", "description": "Description of market opportunities." },
+    "threats": { "type": "string", "description": "Description of market threats." }
+  },
+  "required": ["trends"]
+}

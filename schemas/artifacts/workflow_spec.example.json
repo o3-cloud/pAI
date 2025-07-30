@@ -1,0 +1,44 @@
+{
+  "artifact_name": "Alert Triage Report",
+  "artifact_purpose": "Provide a fast, structured summary of a production alert to guide mitigation and resolution.",
+  "artifact_audience": "On-call engineers and SRE leads",
+  "format_hint": "Bullet-point summary with linked logs and suggested actions; use a neutral, technical tone.",
+  "trigger_type": "system",
+  "trigger_source": "Datadog",
+  "trigger_condition": "alert.severity = 'critical'",
+  "inputs": [
+    {
+      "source": "Datadog",
+      "context": "Alert metadata (ID, severity, timestamp)"
+    },
+    {
+      "source": "Logging system",
+      "context": "Correlated log lines near the alert window"
+    },
+    {
+      "source": "GitHub",
+      "context": "Recent deployments and commit messages"
+    },
+    {
+      "source": "Service registry",
+      "context": "Ownership and contact for affected service"
+    }
+  ],
+  "workflow_steps": [
+    "Detect critical alert and extract metadata",
+    "Correlate logs from the same time window",
+    "Check for related recent deployments",
+    "Identify affected services and owners",
+    "Generate summary with suggested actions",
+    "Deliver to #on-call Slack channel"
+  ],
+  "agent_role": "triage_summarizer",
+  "trust_level": "review_required",
+  "validation_criteria": [
+    "Includes root alert title and timestamp",
+    "Links to logs and dashboards are present",
+    "Suggested actions are relevant and actionable",
+    "Reviewed by on-call engineer before escalation"
+  ],
+  "feedback_mechanism": "Slack emoji reactions and manual edits feed improvement loop"
+}

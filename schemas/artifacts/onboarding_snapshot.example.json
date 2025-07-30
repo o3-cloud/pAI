@@ -1,0 +1,6 @@
+{
+  "employee_name": "John Smith",
+  "start_date": "2025-07-15",
+  "completed_steps": ["Account setup", "Security training"],
+  "pending_steps": ["Team introduction"]
+}

@@ -1,0 +1,6 @@
+{
+  "meeting_date": "2025-07-29",
+  "attendees": ["Alice", "Bob", "Carol"],
+  "topics": ["Q3 roadmap", "Bug triage"],
+  "action_items": ["Finalize roadmap", "Fix critical bugs"]
+}

@@ -1,0 +1,31 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "ChangeImpactAnalysis",
+    "type": "object",
+    "properties": {
+        "description": {
+            "type": "string",
+            "description": "A summary of the change and its purpose."
+        },
+        "affected_systems": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "List of systems that will be impacted by the change."
+        },
+        "dependencies": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "List of dependencies that may be affected or need to be considered."
+        },
+        "teams": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Teams involved in or impacted by the change."
+        },
+        "rollback_plan": {
+            "type": "string",
+            "description": "Plan for reverting the change if necessary."
+        }
+    },
+    "required": ["description", "affected_systems"]
+}

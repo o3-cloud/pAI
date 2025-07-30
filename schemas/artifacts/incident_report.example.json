@@ -1,0 +1,7 @@
+{
+  "incident_id": "INC-20250730-001",
+  "date": "2025-07-30",
+  "description": "API outage due to database connection failure.",
+  "impact": "Service unavailable for 30 minutes.",
+  "resolution": "Restarted database and increased connection pool."
+}

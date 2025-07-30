@@ -1,0 +1,6 @@
+{
+  "title": "Database Restore Procedure",
+  "version": "1.0",
+  "steps": ["Stop services", "Restore backup", "Start services"],
+  "notes": "Test restore in staging before production."
+}

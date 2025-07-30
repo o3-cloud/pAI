@@ -1,0 +1,8 @@
+{
+  "title": "Adopt PostgreSQL for Main Database",
+  "date": "2025-07-30",
+  "status": "Accepted",
+  "context": "Need for a scalable, reliable relational database.",
+  "decision": "Use PostgreSQL for all new services.",
+  "consequences": "Migration required for legacy systems."
+}

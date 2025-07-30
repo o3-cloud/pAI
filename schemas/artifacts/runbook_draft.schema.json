@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RunbookDraft",
+  "type": "object",
+  "properties": {
+    "title": { "type": "string", "description": "Title of the runbook." },
+    "steps": { "type": "array", "items": { "type": "string" }, "description": "List of steps to follow." },
+    "references": { "type": "array", "items": { "type": "string", "format": "uri" }, "description": "List of reference URLs." }
+  },
+  "required": ["title", "steps"]
+}

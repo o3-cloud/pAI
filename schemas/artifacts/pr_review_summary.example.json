@@ -1,0 +1,7 @@
+{
+  "pr_id": "1234",
+  "reviewer": "Jane Doe",
+  "date": "2025-07-30",
+  "summary": "Code is well-structured. Minor changes suggested.",
+  "action_items": ["Refactor function names"]
+}

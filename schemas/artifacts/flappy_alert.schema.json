@@ -1,0 +1,91 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Flappy Alert Report",
+    "description": "Schema for reporting and analyzing flappy/noisy alerts detected in monitoring systems.",
+    "type": "object",
+    "properties": {
+        "artifact_name": {
+            "type": "string",
+            "const": "Flappy Alert Report"
+        },
+        "artifact_purpose": {
+            "type": "string",
+            "description": "Purpose of the report."
+        },
+        "artifact_audience": {
+            "type": "string",
+            "description": "Intended audience for the report."
+        },
+        "alert_summary": {
+            "type": "object",
+            "properties": {
+                "monitor_name": {
+                    "type": "string"
+                },
+                "condition": {
+                    "type": "string"
+                },
+                "trigger_value": {
+                    "type": "number"
+                },
+                "recovery_value": {
+                    "type": "number"
+                },
+                "alert_links": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uri"
+                    }
+                }
+            },
+            "required": [
+                "monitor_name",
+                "condition",
+                "trigger_value",
+                "recovery_value",
+                "alert_links"
+            ]
+        },
+        "analysis": {
+            "type": "object",
+            "properties": {
+                "flap_reason": {
+                    "type": "string"
+                },
+                "impact": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "flap_reason",
+                "impact"
+            ]
+        },
+        "recommendations": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "next_actions": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "feedback_mechanism": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "artifact_name",
+        "artifact_purpose",
+        "artifact_audience",
+        "alert_summary",
+        "analysis",
+        "recommendations",
+        "next_actions",
+        "feedback_mechanism"
+    ]
+}

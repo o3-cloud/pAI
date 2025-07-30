@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ArtifactWorkflowSpec",
+  "type": "object",
+  "required": ["artifact_name", "artifact_purpose", "trigger_type", "trigger_source", "inputs", "workflow_steps", "agent_role", "trust_level", "validation_criteria"],
+  "properties": {
+    "artifact_name": {
+      "type": "string",
+      "description": "What is the name of the artifact being produced?"
+    },
+    "artifact_purpose": {
+      "type": "string",
+      "description": "What decision, action, or communication does this artifact support?"
+    },
+    "artifact_audience": {
+      "type": "string",
+      "description": "Who will read or use this artifact?"
+    },
+    "format_hint": {
+      "type": "string",
+      "description": "Optional formatting expectations (structure, tone, length)"
+    },
+    "trigger_type": {
+      "type": "string",
+      "enum": ["manual", "system", "scheduled"],
+      "description": "What kind of event triggers this workflow?"
+    },
+    "trigger_source": {
+      "type": "string",
+      "description": "The source system or event that fires the trigger (e.g., GitHub, Datadog)"
+    },
+    "trigger_condition": {
+      "type": "string",
+      "description": "Optional condition to filter triggering events (e.g., label = urgent)"
+    },
+    "inputs": {
+      "type": "array",
+      "description": "List of required inputs or context sources",
+      "items": {
+        "type": "object",
+        "required": ["source", "context"],
+        "properties": {
+          "source": { "type": "string" },
+          "context": { "type": "string" }
+        }
+      }
+    },
+    "workflow_steps": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Step-by-step logic for the agent to follow"
+    },
+    "agent_role": {
+      "type": "string",
+      "description": "Short descriptor of what the agent does (e.g., summarizer, synthesizer)"
+    },
+    "trust_level": {
+      "type": "string",
+      "enum": ["autonomous", "review_required", "draft_only"],
+      "description": "How much autonomy the agent is allowed"
+    },
+    "validation_criteria": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Checklist of what makes this artifact successful"
+    },
+    "feedback_mechanism": {
+      "type": "string",
+      "description": "Optional: how human feedback is collected or used"
+    }
+  }
+}

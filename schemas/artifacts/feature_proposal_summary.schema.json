@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FeatureProposalSummary",
+  "type": "object",
+  "properties": {
+    "goals": { "type": "string", "description": "Goals of the proposed feature." },
+    "metrics": { "type": "array", "items": { "type": "string" }, "description": "Metrics to measure success." },
+    "scope": { "type": "string", "description": "Scope of the proposal." },
+    "tradeoffs": { "type": "string", "description": "Tradeoffs considered." }
+  },
+  "required": ["goals", "scope"]
+}

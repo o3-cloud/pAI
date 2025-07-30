@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OKRProgressSnapshot",
+  "type": "object",
+  "properties": {
+    "okr": {
+      "type": "string",
+      "description": "Objective and Key Result being tracked."
+    },
+    "percent_complete": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Percent completion of the OKR."
+    },
+    "at_risk": {
+      "type": "boolean",
+      "description": "Whether the OKR is at risk."
+    },
+    "next_priorities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Next priorities for the OKR."
+    }
+  },
+  "required": [
+    "okr",
+    "percent_complete"
+  ]
+}

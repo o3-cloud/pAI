@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RiskSummary",
+  "type": "object",
+  "properties": {
+    "summary": { "type": "string", "description": "A brief summary of the risks." },
+    "risk_score": { "type": "number", "minimum": 0, "maximum": 10, "description": "A score representing the overall risk level." },
+    "affected_systems": { "type": "array", "items": { "type": "string" }, "description": "List of systems affected by the risks." }
+  },
+  "required": ["summary", "risk_score"]
+}

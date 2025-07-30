@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProjectBrief",
+  "type": "object",
+  "properties": {
+    "project_name": { "type": "string", "description": "Name of the project." },
+    "summary": { "type": "string", "description": "Brief summary of the project." },
+    "goals": { "type": "array", "items": { "type": "string" }, "description": "List of project goals." },
+    "stakeholders": { "type": "array", "items": { "type": "string" }, "description": "List of project stakeholders." },
+    "key_decisions": { "type": "array", "items": { "type": "string" } },
+    "people": { "type": "array", "items": { "type": "string" } }
+  },
+  "required": ["summary"]
+}

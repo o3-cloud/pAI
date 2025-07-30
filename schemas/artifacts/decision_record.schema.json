@@ -1,0 +1,34 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "DecisionRecord",
+    "type": "object",
+    "properties": {
+        "decision": {
+            "type": "string",
+            "description": "A brief summary of the decision being recorded."
+        },
+        "context": {
+            "type": "string",
+            "description": "The background or context in which the decision was made."
+        },
+        "alternatives": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "A list of alternative options that were considered."
+        },
+        "consequences": {
+            "type": "string",
+            "description": "The expected consequences or impact of the decision."
+        },
+        "chosen": {
+            "type": "string",
+            "description": "The option that was ultimately chosen."
+        },
+        "date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date when the decision was made (YYYY-MM-DD)."
+        }
+    },
+    "required": ["decision", "context", "chosen"]
+}

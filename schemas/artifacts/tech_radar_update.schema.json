@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TechRadarUpdate",
+  "type": "object",
+  "properties": {
+    "tool": { "type": "string", "description": "Name of the technology or tool." },
+    "recommendation": { "type": "string", "description": "Recommendation for the technology/tool." },
+    "maturity": { "type": "string", "enum": ["adopt", "trial", "assess", "hold"], "description": "Maturity level of the technology/tool." },
+    "use_cases": { "type": "array", "items": { "type": "string" }, "description": "List of use cases for the technology/tool." }
+  },
+  "required": ["tool", "recommendation", "maturity"]
+}

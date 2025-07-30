@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PRReviewSummary",
+  "type": "object",
+  "properties": {
+    "summary": { "type": "string", "description": "Summary of the pull request review." },
+    "issues_flagged": { "type": "array", "items": { "type": "string" }, "description": "List of issues identified." },
+    "reviewers_suggested": { "type": "array", "items": { "type": "string" }, "description": "List of suggested reviewers." }
+  },
+  "required": ["summary"]
+}

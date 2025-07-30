@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FeedbackSummary",
+  "type": "object",
+  "properties": {
+    "strengths": { "type": "array", "items": { "type": "string" }, "description": "List of strengths identified." },
+    "areas_to_improve": { "type": "array", "items": { "type": "string" }, "description": "List of areas needing improvement." }
+  },
+  "required": ["strengths", "areas_to_improve"]
+}

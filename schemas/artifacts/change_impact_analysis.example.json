@@ -1,0 +1,7 @@
+{
+  "description": "Update the authentication module to support OAuth2.",
+  "affected_systems": ["auth-service", "user-portal"],
+  "dependencies": ["database", "external-oauth-provider"],
+  "teams": ["backend", "security"],
+  "rollback_plan": "Revert to previous authentication logic and restore backup database."
+}

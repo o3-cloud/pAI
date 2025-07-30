@@ -1,0 +1,7 @@
+{
+  "deployment_name": "v2.1.0 Release",
+  "date": "2025-07-30",
+  "systems": ["web-app", "api-server"],
+  "summary": "Major release with new features and bug fixes.",
+  "steps": ["Backup database", "Deploy containers", "Run smoke tests"]
+}

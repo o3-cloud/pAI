@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IncidentReport",
+  "type": "object",
+  "properties": {
+    "timeline": { "type": "array", "items": { "type": "string" }, "description": "List of events in the incident timeline." },
+    "root_cause": { "type": "string", "description": "Root cause of the incident." },
+    "mitigation": { "type": "string", "description": "Steps taken to mitigate the incident." },
+    "follow_ups": { "type": "array", "items": { "type": "string" }, "description": "List of follow-up actions." }
+  },
+  "required": ["timeline", "root_cause", "mitigation"]
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MeetingSummary",
+  "type": "object",
+  "properties": {
+    "title": { "type": "string", "description": "Calendar event title." },
+    "date": { "type": "string", "format": "date-time", "description": "Date and time of the meeting (ISO 8601 format)." },
+    "participants": { "type": "array", "items": { "type": "string" }, "description": "List of meeting participants." },
+    "summary": { "type": "array", "items": { "type": "string" }, "description": "Key bullet points summarizing the meeting." },
+    "decisions": { "type": "array", "items": { "type": "string" }, "description": "List of decisions made." },
+    "actions": {
+      "type": "array",
+      "description": "List of action items.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "action": { "type": "string", "description": "Description of the action." },
+          "assignee": { "type": "string", "description": "Person responsible." },
+          "due": { "type": "string", "format": "date-time", "description": "Due date/time (ISO 8601 format)." }
+        },
+        "required": ["action"]
+      }
+    }
+  },
+  "required": ["title", "date", "participants", "summary"]
+}

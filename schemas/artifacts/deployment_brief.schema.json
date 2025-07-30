@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeploymentBrief",
+  "type": "object",
+  "properties": {
+    "release": { "type": "string", "description": "Release identifier or name." },
+    "changes": { "type": "string", "description": "Description of changes in the deployment." },
+    "approved_by": { "type": "string", "description": "Person who approved the deployment." },
+    "checklist": { "type": "array", "items": { "type": "string" }, "description": "Checklist items for the deployment." }
+  },
+  "required": ["release", "changes"]
+}

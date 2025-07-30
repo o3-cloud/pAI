@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OnboardingSnapshot",
+  "type": "object",
+  "properties": {
+    "summary": {
+      "type": "string",
+      "description": "Summary of the onboarding process."
+    },
+    "key_resources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of key resources provided during onboarding."
+    },
+    "contacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of important contacts for the new hire."
+    }
+  },
+  "required": [
+    "summary"
+  ]
+}
