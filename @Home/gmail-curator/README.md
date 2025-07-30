@@ -6,7 +6,7 @@ This agent monitors a Gmail inbox for important, non-newsletter emails and provi
 
 Before running the agent, ensure you have the following installed:
 - [Taskfile](https://taskfile.dev/)
-- [Agentman](https://github.com/AgentO3/agentman)
+- [Agentman](https://github.com/o3-cloud/agentman)
 
 You will also need to set the following environment variable:
 - `OPENAI_API_KEY`: Your OpenAI API key.

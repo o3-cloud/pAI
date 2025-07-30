@@ -10,7 +10,7 @@ This document outlines the core technologies used in the pAI@Home project.
 
 ---
 
-### [Agentman](https://github.com/AgentO3/agentman)
+### [Agentman](https://github.com/o3-cloud/agentman)
 - **Purpose**: A platform for creating and deploying AI agents.
 - **Role**: Used to generate the initial boilerplate code for the agents in this project.
 

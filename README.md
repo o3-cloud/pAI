@@ -144,7 +144,7 @@ Each agent includes:
 
 - [Taskfile](https://taskfile.dev/) - Modern task runner
 - [Fast Agent](https://fast-agent.ai/) - AI agent framework
-- [Agentman](https://github.com/AgentO3/agentman) - Agent scaffolding tool
+- [Agentman](https://github.com/o3-cloud/agentman) - Agent scaffolding tool
 - OpenAI API key for LLM capabilities
 
 ### Repository Structure

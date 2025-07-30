@@ -34,7 +34,7 @@ jobs:
 
       - name: Install Agentman
         run: |
-          uv tool install git+https://github.com/AgentO3/agentman.git@main#egg=agentman-mcp
+          uv tool install git+https://github.com/o3-cloud/agentman.git@main#egg=agentman-mcp
 
       - name: Set up Gmail MCP credentials
         env:
