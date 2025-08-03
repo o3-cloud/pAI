@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AgentCustomInstructions",
+  "type": "object",
+  "properties": {
+    "role": {
+      "type": "string",
+      "description": "The role or identity of the agent."
+    },
+    "objective": {
+      "type": "string",
+      "description": "Primary objective or goal of the agent."
+    },
+    "general_guidelines": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "General behavioral rules and policies for the agent."
+    },
+    "workflow": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Ordered steps that define the core workflow for the agent."
+    },
+    "edge_cases_and_guardrails": {
+      "type": "array",
+      "description": "Edge cases and guardrails for handling special or risky situations.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "situation": { "type": "string" },
+          "action": { "type": "string" }
+        },
+        "required": ["situation", "action"]
+      }
+    },
+    "tool_usage_instructions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Guidelines for when and how to use available tools/APIs."
+    },
+    "fallbacks_and_escalation": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Instructions for what to do when the agent cannot proceed or encounters failure/ambiguity."
+    },
+    "examples": {
+      "type": "array",
+      "description": "Sample user prompts and model responses to clarify expected behavior.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "user_prompt": { "type": "string" },
+          "agent_response": { "type": "string" }
+        },
+        "required": ["user_prompt", "agent_response"]
+      }
+    },
+    "dos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Explicit actions and behaviors the agent should always follow."
+    },
+    "donts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Explicit actions and behaviors the agent should never perform."
+    }
+  },
+  "required": [
+    "role",
+    "objective",
+    "general_guidelines",
+    "workflow",
+    "edge_cases_and_guardrails",
+    "tool_usage_instructions",
+    "fallbacks_and_escalation",
+    "examples",
+    "dos",
+    "donts"
+  ]
+}
