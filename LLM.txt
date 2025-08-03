@@ -1,0 +1,195 @@
+pAI (Personal AI) Setup and Configuration Guide
+
+# Prerequisites Installation
+
+## Step 1: Install UV (Python Package Manager)
+
+### macOS & Linux
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+### Windows
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+### Verify UV Installation
+```bash
+uv --version
+```
+
+## Step 2: Install Agentman
+
+### Install Agentman via UV
+```bash
+uv tool install git+https://github.com/o3-cloud/agentman.git@main#egg=agentman-mcp
+```
+
+### Verify Agentman Installation
+```bash
+agentman --help
+```
+
+---
+
+# pAI System Overview
+
+pAI is a Personal AI system consisting of intelligent agents that automate personal and professional workflows using:
+
+- **FastAgent Framework**: AI agent framework with minimal boilerplate
+- **GitHub Actions**: Scheduled execution and CI/CD  
+- **MCP Protocol**: Standardized integration with external services (Gmail, etc.)
+- **Agentman**: Platform for creating and deploying AI agents
+
+## Core Architecture
+
+### Agent Structure
+Each agent follows this standard structure:
+- `Agentfile`: Agent configuration using FastAgent/Docker syntax
+- `Taskfile.yml`: Task definitions for development and deployment
+- `agent/`: Core implementation with `agent.py`, `fastagent.config.yaml`, and `prompt.txt`
+
+### Context Organization
+- `@Home/`: Personal life automation agents
+- `@Work/`: Professional workflow agents
+- Each context has its own `ME.md` file for personal context
+
+---
+
+# Initial Setup Process
+
+## Step 1: Create Your Personal Context Files
+
+### Create ME.md File
+Your ME.md file provides personal context for AI agents. Choose your context:
+
+**For Personal (@Home) Context:**
+- See detailed instructions: [ME.md Creation Guide](.github/instructions/me.instructions.md)
+- Location: `@Home/ME.md`
+
+**For Professional (@Work) Context:**
+- See detailed instructions: [ME.md Creation Guide](.github/instructions/me.instructions.md)  
+- Location: `@Work/ME.md`
+
+### Create TEAM.md File (Optional for @Work)
+For professional contexts, create team documentation:
+- See detailed instructions: [TEAM.md Creation Guide](.github/instructions/team.instructions.md)
+- Location: `@Work/TEAM.md`
+
+## Step 2: Set Up Your First Agent
+
+### Choose an Agent Template
+Available agents:
+- **Gmail Curator**: Monitors inbox for important emails and provides summaries
+- **Gmail Newsletter**: Processes newsletters and creates weekly digests
+- **PR Diff Auditor**: Reviews pull request changes
+- **Test Coverage Advisor**: Analyzes and suggests test improvements
+
+### Navigate to Agent Directory
+```bash
+cd @Home/gmail-curator  # or your chosen agent
+```
+
+### Configure Environment Variables
+Required for all agents:
+```bash
+export OPENAI_API_KEY="your-key-here"
+export GMAIL_AUTH_KEYS="your-gmail-keys"  # for Gmail agents
+export GMAIL_CREDS="your-gmail-creds"     # for Gmail agents
+```
+
+### Run Your Agent
+```bash
+# Generate prompt from your ME.md
+task prompt
+
+# Run the agent
+task agent
+
+# Or run complete workflow
+task run
+```
+
+---
+
+# Personalization Questions
+
+To help you set up your pAI system effectively, I'll ask clarifying questions one at a time:
+
+## Initial Context Questions
+1. **What is your primary use case?**
+   - Personal productivity and email management (@Home)
+   - Professional workflow automation (@Work)
+   - Both personal and professional contexts
+
+2. **What's your preferred name and pronouns?**
+
+3. **What are your main goals for AI assistance?**
+   - Email management and filtering
+   - Calendar and scheduling
+   - Document summarization
+   - Task automation
+   - Other (please specify)
+
+## Personal Context (@Home) Questions
+4. **What personal workflows would you like to automate?**
+   - Newsletter summarization
+   - Important email alerts
+   - Calendar reminders
+   - Personal task tracking
+
+5. **What are your personal interests and hobbies?**
+
+6. **How would you describe your ideal 'good day'?**
+
+## Professional Context (@Work) Questions  
+7. **What's your job title and industry?**
+
+8. **What technologies do you work with daily?**
+
+9. **What are your main professional pain points?**
+   - Code review overhead
+   - Meeting summaries
+   - Status updates
+   - Technical documentation
+
+10. **What's your preferred work communication style?**
+
+---
+
+# Common Next Steps
+
+After initial setup, you can:
+
+## Development Tasks
+- **Create Custom Agents**: Use `agentman create` to build new agents
+- **Modify Existing Agents**: Edit `Agentfile` and `agent.py` files
+- **Test Locally**: Run `task run` in any agent directory
+- **Set Up Scheduling**: Configure GitHub Actions workflows
+
+## Configuration Tasks  
+- **Add MCP Servers**: Integrate with Gmail, Slack, Notion, etc.
+- **Environment Setup**: Configure API keys and credentials
+- **Agent Customization**: Modify prompts and behaviors
+- **Context Updates**: Keep ME.md and TEAM.md files current
+
+## Advanced Usage
+- **Multi-agent Workflows**: Chain multiple agents together
+- **Custom Scheduling**: Set up complex cron schedules
+- **Integration Patterns**: Connect with external APIs and services
+- **Monitoring Setup**: Track agent performance and outputs
+
+---
+
+# Getting Help
+
+For specific questions or issues:
+
+1. **Agent Creation**: "How do I create a custom agent for [specific task]?"
+2. **Configuration Issues**: "I'm having trouble with [specific component]"  
+3. **Integration Questions**: "How do I connect to [external service]?"
+4. **Scheduling Problems**: "My agent isn't running on schedule"
+5. **Context Setup**: "Help me improve my ME.md file"
+
+Please specify your question or area of interest, and I'll provide detailed, step-by-step guidance tailored to your needs and current setup progress.
