@@ -1,0 +1,46 @@
+# pAI - Personal AI System
+
+> A collection of intelligent agents that automate personal and professional workflows using FastAgent framework, GitHub Actions scheduling, and MCP protocol for external service integration.
+
+pAI enables you to create personalized AI agents that understand your context, preferences, and workflows. The system is organized into @Home and @Work contexts, each with their own ME.md files that provide personal context to agents. Agents are built using FastAgent framework and can be scheduled via GitHub Actions or run locally.
+
+Key differentiators: Personal context awareness through ME.md files, modular agent architecture, MCP protocol integration for external services (Gmail, etc.), and automated scheduling capabilities.
+
+## Setup Instructions
+
+- [Personal Context Setup](.github/instructions/me.instructions.md): Step-by-step guide for creating ME.md files that personalize your AI agents
+- [Team Context Setup](.github/instructions/team.instructions.md): Instructions for creating TEAM.md files for collaborative workflows
+- [System Requirements](CLAUDE.md): Core architecture overview, technologies, and environment variables needed
+- [Agent Development Guide](CLAUDE.md#development-patterns): FastAgent patterns, Taskfile structure, and MCP server configuration
+
+## Agent Examples
+
+- [Gmail Curator](@Home/gmail-curator/README.md): Monitors inbox for important emails and provides summaries (3x daily schedule)
+- [Gmail Newsletter](@Home/gmail-newsletter/README.md): Processes newsletters and creates weekly digests
+- [Home Context Template](@Home/ME.md): Example personal context file for @Home agents
+- [Work Context Template](@Work/ME.md): Example professional context file for @Work agents
+
+## Configuration Files
+
+- [Repository Setup](CLAUDE.md): Complete development guide including common commands and workflow patterns  
+- [Agent Structure](CLAUDE.md#agent-structure): Standard file organization (Agentfile, Taskfile.yml, agent.py, fastagent.config.yaml)
+- [GitHub Actions Workflows](.github/workflows/): Automated scheduling and deployment configurations
+- [Docker Configuration](docker/Dockerfile.base): Base container for agent execution
+
+## Optional
+
+- [Project Schemas](schemas/): JSON schemas for various agent artifacts and outputs
+- [Technology Stack](STACK.md): Detailed technical architecture and dependencies
+- [Web Interface](index.html): Browser-based project overview and navigation
+
+## Getting Started
+
+To set up your personalized pAI system:
+
+1. **Create Personal Context**: Use the ME.md creation instructions to build context files for @Home and @Work
+2. **Install Prerequisites**: Set up Agentman, FastAgent, and required environment variables
+3. **Configure Services**: Set up MCP servers for external integrations (Gmail, etc.)
+4. **Deploy Agents**: Use GitHub Actions for scheduling or run locally with task commands
+5. **Customize Workflows**: Modify existing agents or create new ones based on your needs
+
+The system is designed to learn your preferences through the ME.md context files and provide increasingly personalized automation over time.
