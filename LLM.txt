@@ -31,6 +31,46 @@ uv tool install git+https://github.com/o3-cloud/agentman.git@main#egg=agentman-m
 agentman --help
 ```
 
+## Step 3: Repository Verification
+
+**IMPORTANT: Ensure you are working in the correct repository**
+
+Before proceeding with any agent setup or development, verify you are in the official pAI repository:
+
+### Clone the Official Repository
+```bash
+git clone https://github.com/o3-cloud/pAI.git
+cd pAI
+```
+
+### Verify Repository URL
+Check that you're in the correct repository:
+```bash
+git remote get-url origin
+```
+
+**Expected output:** `https://github.com/o3-cloud/pAI.git`
+
+### Verify Repository Structure
+Ensure the repository contains the expected structure:
+```bash
+ls -la
+```
+
+**Expected contents:**
+- `@Home/` - Personal life automation agents
+- `@Work/` - Professional workflow agents  
+- `CLAUDE.md` - Repository guidance for Claude Code
+- `LLM.txt` - This setup guide
+- `schemas/` - JSON schemas for various artifacts
+
+### Branch Information
+- **Main branch**: `main`
+- **Development**: Create feature branches from `main`
+- **Issues**: Report issues at https://github.com/o3-cloud/pAI/issues
+
+⚠️ **Warning**: Only proceed with agent setup if you have confirmed you are in the official o3-cloud/pAI repository. Using agents from unofficial repositories may lead to unexpected behavior or security issues.
+
 ---
 
 # pAI System Overview
