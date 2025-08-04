@@ -31,7 +31,36 @@ uv tool install git+https://github.com/o3-cloud/agentman.git@main#egg=agentman-m
 agentman --help
 ```
 
-## Step 3: Repository Verification
+## Step 3: Install Task (Task Runner)
+
+Task is used for running development workflows and agent operations.
+
+### macOS
+```bash
+brew install go-task/tap/go-task
+```
+
+### Linux
+```bash
+sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin
+```
+
+### Windows
+```powershell
+choco install go-task
+```
+
+Or using Scoop:
+```powershell
+scoop install task
+```
+
+### Verify Task Installation
+```bash
+task --version
+```
+
+## Step 4: Repository Verification
 
 **IMPORTANT: Ensure you are working in the correct repository**
 

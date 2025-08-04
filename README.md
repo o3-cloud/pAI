@@ -140,10 +140,24 @@ Each agent includes:
 
 ## 🚀 Getting Started
 
+### 🤖 Agent-Assisted Setup
+
+You can use the GitHub Copilot agent or another agentic coder to set up RepoRadio CLI automatically.
+
+**Quickstart:**
+
+1. Download the setup instructions:
+   ```bash
+   curl -o PAI_INSTRUCTIONS.txt https://raw.githubusercontent.com/o3-cloud/pai/refs/heads/main/LLM.txt
+   ```
+2. Give the `PAI_INSTRUCTIONS.txt` file to your agent (e.g., Copilot agent) and prompt:
+   > Follow these instructions to setup pAI
+
+The agent will guide you through the setup process interactively.
+
 ### Prerequisites
 
 - [Taskfile](https://taskfile.dev/) - Modern task runner
-- [Fast Agent](https://fast-agent.ai/) - AI agent framework
 - [Agentman](https://github.com/o3-cloud/agentman) - Agent scaffolding tool
 - OpenAI API key for LLM capabilities
 
