@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "title": "Corporate Context File (CCF)",
+  "type": "object",
+  "properties": {
+    "entity": { "type": "string", "description": "Name of the company or entity" },
+    "program": { "type": "string", "description": "Program or focus area (e.g. Information Security)" },
+    "purpose": { "type": "string" },
+    "problems": {
+      "type": "array",
+      "items": { "type": "object", "properties": {
+        "id": { "type": "string" },
+        "description": { "type": "string" }
+      }, "required": ["id", "description"] }
+    },
+    "mission": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "statement": { "type": "string" }
+      },
+      "required": ["id", "statement"]
+    },
+    "goals": {
+      "type": "array",
+      "items": { "type": "object", "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "target_date": { "type": "string", "format": "date" }
+      }, "required": ["id", "name"] }
+    },
+    "kpis": {
+      "type": "array",
+      "items": { "type": "object", "properties": {
+        "id": { "type": "string" },
+        "metric": { "type": "string" },
+        "unit": { "type": "string" },
+        "current_value": {},
+        "goal_value": {}
+      }, "required": ["id", "metric"] }
+    },
+    "strategies": {
+      "type": "array",
+      "items": { "type": "object", "properties": {
+        "id": { "type": "string" },
+        "description": { "type": "string" }
+      }, "required": ["id", "description"] }
+    },
+    "risk_register": {
+      "type": "array",
+      "items": { "type": "object", "properties": {
+        "id": { "type": "string" },
+        "risk": { "type": "string" },
+        "impact": { "type": "string" },
+        "likelihood": { "type": "string" },
+        "status": { "type": "string" }
+      }, "required": ["id", "risk"] }
+    },
+    "infrastructure": {
+      "type": "object",
+      "properties": {
+        "tech_stack": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "projects": {
+      "type": "array",
+      "items": { "type": "object", "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "priority": { "type": "string" },
+        "members": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "start_date": { "type": "string", "format": "date" },
+        "end_date": { "type": "string", "format": "date" },
+        "status": { "type": "string" },
+        "cost": {}
+      }, "required": ["name"] }
+    },
+    "organization": {
+      "type": "object",
+      "properties": {
+        "team_members": {
+          "type": "array",
+          "items": { "type": "object", "properties": {
+            "name": { "type": "string" },
+            "role": { "type": "string" },
+            "skills": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "pay_level": { "type": "string" },
+            "location": { "type": "string" }
+          }, "required": ["name", "role"] }
+        }
+      }
+    },
+    "narrative": { "type": "string" }
+  },
+  "required": ["entity", "program", "mission"]
+}

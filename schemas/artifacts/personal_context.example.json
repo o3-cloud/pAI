@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "author": "John Whick",
+    "date_created": "2025-08-04",
+    "date_updated": "2025-08-04"
+  },
+  "problems": [
+    {
+      "id": "P1",
+      "description": "People struggle to find meaning and clarity in a world full of distractions and superficial goals."
+    },
+    {
+      "id": "P2",
+      "description": "Many lack actionable systems to convert life purpose into daily action."
+    }
+  ],
+  "missions": [
+    {
+      "id": "M1",
+      "description": "Help myself and others find clarity and meaning by defining and aligning with personal Telos.",
+      "time_sensitive": false
+    },
+    {
+      "id": "M2",
+      "description": "Develop and share tools for continuous self-improvement and value-driven living.",
+      "time_sensitive": true
+    }
+  ],
+  "goals": [
+    {
+      "id": "G1",
+      "mission_id": "M1",
+      "description": "Write a personal Telos statement and revisit it weekly.",
+      "target_date": "2025-09-01"
+    },
+    {
+      "id": "G2",
+      "mission_id": "M2",
+      "description": "Create a blog series and toolkit for practical Telos application.",
+      "target_date": "2025-12-01"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "ME1",
+      "goal_id": "G1",
+      "metric_name": "Weeks reviewed Telos statement",
+      "current_value": 2,
+      "target_value": 4
+    },
+    {
+      "id": "ME2",
+      "goal_id": "G2",
+      "metric_name": "Blog posts published",
+      "current_value": 1,
+      "target_value": 5
+    }
+  ],
+  "strategies": [
+    {
+      "id": "S1",
+      "goal_id": "G1",
+      "description": "Block 15 minutes every Sunday to reflect and revise Telos statement."
+    },
+    {
+      "id": "S2",
+      "goal_id": "G2",
+      "description": "Outline blog topics, draft weekly, and share drafts for peer review."
+    }
+  ],
+  "notes": [
+    "Telos work feels most valuable when connected to real daily action.",
+    "Consider sharing progress publicly for accountability.",
+    "Explore collaboration with like-minded individuals."
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "entity": "Acme Corp",
+  "program": "Corporate Security",
+  "purpose": "To ensure the safety and security of Acme Corp’s data, people, and reputation.",
+  "problems": [
+    {
+      "id": "P1",
+      "description": "Growing frequency of phishing attacks targeting employees."
+    },
+    {
+      "id": "P2",
+      "description": "Lack of security awareness among staff."
+    }
+  ],
+  "mission": {
+    "id": "M1",
+    "statement": "Protect Acme Corp’s assets and reputation by preventing, detecting, and responding to security threats."
+  },
+  "goals": [
+    {
+      "id": "G1",
+      "name": "Reduce phishing incidents by 50%",
+      "description": "Implement company-wide security training and advanced email filtering.",
+      "target_date": "2026-01-01"
+    },
+    {
+      "id": "G2",
+      "name": "Achieve SOC2 compliance",
+      "description": "Prepare documentation and conduct required audits.",
+      "target_date": "2025-12-31"
+    }
+  ],
+  "kpis": [
+    {
+      "id": "KPI1",
+      "metric": "Phishing incident rate",
+      "unit": "incidents/month",
+      "current_value": 8,
+      "goal_value": 4
+    },
+    {
+      "id": "KPI2",
+      "metric": "Time to patch vulnerabilities",
+      "unit": "days",
+      "current_value": 14,
+      "goal_value": 7
+    }
+  ],
+  "strategies": [
+    {
+      "id": "S1",
+      "description": "Deploy company-wide mandatory security training."
+    },
+    {
+      "id": "S2",
+      "description": "Implement automated email scanning and quarantine."
+    }
+  ],
+  "risk_register": [
+    {
+      "id": "R1",
+      "risk": "Ransomware attack",
+      "impact": "Critical",
+      "likelihood": "Medium",
+      "status": "Open"
+    },
+    {
+      "id": "R2",
+      "risk": "Third-party vendor breach",
+      "impact": "High",
+      "likelihood": "Low",
+      "status": "Mitigated"
+    }
+  ],
+  "infrastructure": {
+    "tech_stack": [
+      "AWS",
+      "Okta",
+      "CrowdStrike",
+      "Slack"
+    ],
+    "notes": "Migrating legacy systems to AWS by end of 2025."
+  },
+  "projects": [
+    {
+      "name": "Phishing Awareness Campaign",
+      "description": "Quarterly campaigns to raise employee awareness.",
+      "priority": "High",
+      "members": ["Alice Smith", "Bob Johnson"],
+      "start_date": "2025-01-15",
+      "end_date": "2025-03-30",
+      "status": "Ongoing",
+      "cost": 10000
+    },
+    {
+      "name": "SOC2 Preparation",
+      "description": "Collect documents and policies, conduct internal audits.",
+      "priority": "Medium",
+      "members": ["Claire Lee"],
+      "start_date": "2025-04-01",
+      "end_date": "2025-12-31",
+      "status": "Planned",
+      "cost": 25000
+    }
+  ],
+  "organization": {
+    "team_members": [
+      {
+        "name": "Alice Smith",
+        "role": "Security Lead",
+        "skills": ["Incident Response", "Security Training"],
+        "pay_level": "L3",
+        "location": "Remote"
+      },
+      {
+        "name": "Bob Johnson",
+        "role": "Cloud Security Engineer",
+        "skills": ["AWS", "Automation", "DevSecOps"],
+        "pay_level": "L2",
+        "location": "Austin, TX"
+      }
+    ]
+  },
+  "narrative": "Acme Corp’s security program is evolving rapidly to address emerging threats. With new hires and ongoing training, we aim to embed a security-first culture across all departments. Major risks are tracked and reviewed monthly."
+}

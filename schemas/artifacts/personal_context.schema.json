@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Personal Context File (PCF)",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "author": { "type": "string" },
+        "date_created": { "type": "string", "format": "date" },
+        "date_updated": { "type": "string", "format": "date" }
+      },
+      "required": ["author"]
+    },
+    "problems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "description": { "type": "string" }
+        },
+        "required": ["id", "description"]
+      }
+    },
+    "missions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "description": { "type": "string" },
+          "time_sensitive": { "type": "boolean", "default": false }
+        },
+        "required": ["id", "description"]
+      }
+    },
+    "goals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "mission_id": { "type": "string" },
+          "description": { "type": "string" },
+          "target_date": { "type": "string", "format": "date" }
+        },
+        "required": ["id", "mission_id", "description"]
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "goal_id": { "type": "string" },
+          "metric_name": { "type": "string" },
+          "current_value": {},
+          "target_value": {}
+        },
+        "required": ["id", "goal_id", "metric_name"]
+      }
+    },
+    "strategies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "goal_id": { "type": "string" },
+          "description": { "type": "string" }
+        },
+        "required": ["id", "goal_id", "description"]
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": ["problems", "missions"]
+}
