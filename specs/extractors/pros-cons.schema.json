@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProsAndCons",
+  "description": "A list of pros and cons extracted from a text.",
+  "type": "object",
+  "properties": {
+    "pros": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "A positive aspect or advantage."
+      }
+    },
+    "cons": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "A negative aspect or disadvantage."
+      }
+    }
+  },
+  "required": ["pros", "cons"]
+}
