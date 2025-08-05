@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Plan",
+  "type": "object",
+  "description": "A structured plan with steps extracted from a text.",
+  "properties": {
+    "plan_steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "A single step in the plan.",
+        "properties": {
+          "step": {
+            "type": "string",
+            "description": "The description of the plan step."
+          }
+        },
+        "required": ["step"]
+      }
+    }
+  },
+  "required": ["plan_steps"]
+}
