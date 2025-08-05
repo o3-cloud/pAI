@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExtractedInstructions",
+  "type": "object",
+  "description": "A list of instructions extracted from a text, which may include steps or guidelines for a process. Always verify factual accuracy and guard against hallucinations or misinformation.",
+  "properties": {
+    "instructions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "instruction": {
+            "type": "string",
+            "description": "A step or instruction extracted from the text. Must be factually accurate and verified against reliable sources."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional clarification or explanation of the instruction. Should include source verification when applicable."
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["high", "medium", "low"],
+            "description": "Confidence level in the accuracy of the instruction based on source reliability and verification."
+          }
+        },
+        "required": ["instruction"]
+      }
+    }
+  },
+  "required": ["instructions"]
+}
