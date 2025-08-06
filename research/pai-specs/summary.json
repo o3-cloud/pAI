@@ -1,3 +1,0 @@
-{
-  "summary": "pAI (Personal AI) is a system of intelligent agents custom-built to automate individual workflows and augment decision-making. Built on FastAgent framework with GitHub Actions, it includes @Home agents (Gmail Curator, Gmail Newsletter) and @Work agents (PR Diff Auditor, Test Coverage Advisor). The system follows six core principles: individual context, composability, agency, human-in-the-loop operation, decentralized ownership, and interoperability. Currently has two active agents with several planned, focusing on email automation, code quality, and test coverage analysis."
-}
