@@ -1,0 +1,62 @@
+{
+  "project_name": "Qwen Code",
+  "repository": "https://github.com/QwenLM/qwen-code",
+  "description": "AI-powered command-line workflow tool adapted from Google's Gemini CLI and optimized for Qwen3-Coder models",
+  "main_purpose": "Enhance developer workflows with intelligent code assistance",
+  "key_capabilities": [
+    "Code understanding and editing beyond context window limits",
+    "Workflow automation for PR handling and complex operations",
+    "Interactive CLI with rich terminal experience",
+    "Tool integration for file operations, shell commands, and web fetching",
+    "Session management with token-aware compression",
+    "Multiple AI provider support"
+  ],
+  "architecture": {
+    "type": "Monorepo TypeScript project",
+    "main_packages": [
+      "@qwen-code/qwen-code-core (backend logic)",
+      "@qwen-code/qwen-code (CLI frontend)"
+    ],
+    "integration": "OpenAI-compatible API endpoints",
+    "tools_system": "Extensible architecture with built-in tools"
+  },
+  "existing_github_action": {
+    "available": true,
+    "repository": "QwenLM/qwen-code-action",
+    "features": [
+      "PR review automation",
+      "Issue triage",
+      "Code quality checks",
+      "Configurable tool restrictions",
+      "Sandbox isolation"
+    ]
+  },
+  "license": "Apache License 2.0",
+  "maturity": "Production-ready with active development",
+  "comparison_to_claude_code": {
+    "similarities": [
+      "CLI-based AI assistance",
+      "File system integration",
+      "Tool system architecture",
+      "Session management",
+      "GitHub integration"
+    ],
+    "advantages": [
+      "More mature UI/UX with themes and vim mode",
+      "Docker sandbox isolation",
+      "Extensive customization options",
+      "MCP protocol support",
+      "Rich documentation"
+    ],
+    "disadvantages": [
+      "Less advanced reasoning compared to Claude models",
+      "More complex architecture",
+      "Potentially higher learning curve"
+    ]
+  },
+  "feasibility_assessment": {
+    "overall": "High feasibility",
+    "reasoning": "Mature codebase with existing GitHub Action, well-documented, secure sandbox features, and cost-effective compared to Claude API",
+    "readiness": "Ready for implementation with existing foundation"
+  }
+}
