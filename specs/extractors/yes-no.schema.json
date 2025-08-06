@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "YesOrNo",
+  "type": "object",
+  "description": "A simple yes or no answer extracted from a text.",
+  "properties": {
+    "answer": {
+      "type": "string",
+      "enum": ["yes", "no"],
+      "description": "A yes or no answer."
+    }
+  },
+  "required": ["answer"]
+}

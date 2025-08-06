@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProblemsList",
+  "description": "An array of structured problem statements extracted from source material.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "title": "ProblemDescription",
+    "description": "A structured description of a problem statement extracted from source material.",
+    "properties": {
+      "problem": {
+        "type": "string",
+        "description": "A concise, factual statement describing the problem as explicitly stated or clearly implied in the source material. Must not include assumptions, interpretations, or information not present in the original content."
+      },
+      "details": {
+        "type": "string",
+        "description": "Additional context, constraints, or specifications about the problem that are explicitly mentioned in the source material. Should only include verifiable details from the original content, not inferred or assumed information."
+      }
+    },
+    "required": ["problem"]
+  }
+}
