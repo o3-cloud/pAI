@@ -1,0 +1,63 @@
+{
+  "source_text": "Research this project to document what specs. Use the specs/extractors to extract useful info as json. Compile the extracted json onto a markdown formatted report for review and approval",
+  "extractions": {
+    "summary": {
+      "summary": "Research project specs system, use extractors to generate JSON data, and compile findings into a markdown report"
+    },
+    "action-items": {
+      "action_items": [
+        "Research and document the specs functionality in the project",
+        "Use specs/extractors to extract information as JSON",
+        "Compile extracted JSON data into a markdown report",
+        "Present report for review and approval"
+      ]
+    },
+    "plan": {
+      "plan_steps": [
+        {
+          "step": "Explore project structure to understand what 'specs' are"
+        },
+        {
+          "step": "Research specs/extractors functionality and implementation"
+        },
+        {
+          "step": "Execute extractors to generate JSON data"
+        },
+        {
+          "step": "Compile findings into a comprehensive markdown report"
+        },
+        {
+          "step": "Present for review and approval"
+        }
+      ]
+    },
+    "missing-info": {
+      "missing_information": [
+        "Specific format requirements for the markdown report",
+        "Target audience for the documentation",
+        "What constitutes 'useful info' to extract",
+        "Approval criteria and reviewers"
+      ]
+    },
+    "followup-questions": {
+      "followup_questions": [
+        "What specific aspects of the specs system are most important to document?",
+        "Should the report include usage examples and implementation guidelines?",
+        "Are there particular extractors that should be prioritized for demonstration?",
+        "What level of technical detail is appropriate for the target audience?"
+      ]
+    },
+    "tags": {
+      "tags": [
+        "documentation",
+        "research",
+        "specs",
+        "extractors", 
+        "json",
+        "markdown",
+        "report",
+        "analysis"
+      ]
+    }
+  }
+}
