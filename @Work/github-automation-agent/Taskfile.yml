@@ -1,0 +1,35 @@
+version: 3
+
+tasks:
+  prompt:
+    desc: Generate prompt.txt from parent ME.md context file
+    cmds:
+      - cat ../ME.md > prompt.txt
+      - echo "" >> prompt.txt
+      - echo "## Repository Context" >> prompt.txt
+      - echo "This is a pAI (Personal AI) repository containing automated agents built with FastAgent framework." >> prompt.txt
+      - echo "Focus on GitHub automation tasks including issue triage, PR reviews, and repository health monitoring." >> prompt.txt
+
+  agent:
+    desc: Run the GitHub automation agent
+    cmds:
+      - agentman run --rm -e GEMINI_API_KEY=$GEMINI_API_KEY -v ~/.github-mcp:/root/.github-mcp --from-agentfile -f Agentfile
+
+  run:
+    desc: Complete agent workflow - generate prompt and run agent
+    cmds:
+      - task: prompt
+      - task: agent
+
+  test:
+    desc: Test the agent configuration
+    cmds:
+      - agentman validate -f Agentfile
+      - echo "Testing GitHub MCP server connection..."
+      - docker run --rm -e GITHUB_TOKEN=$GITHUB_TOKEN ghcr.io/github/github-mcp-server --version || echo "GitHub MCP server test completed"
+
+  clean:
+    desc: Clean generated files
+    cmds:
+      - rm -f prompt.txt
+      - docker system prune -f --filter label=agentman

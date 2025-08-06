@@ -1,0 +1,114 @@
+name: 'Gemini Repository Health Monitor'
+
+on:
+  schedule:
+    # Run daily at 9 AM EST (2 PM UTC)
+    - cron: '0 14 * * *'
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: read
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 30  # Get recent history for trend analysis
+
+      - name: Run Repository Health Analysis
+        uses: google-github-actions/run-gemini-cli@v0
+        with:
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          settings: |
+            {
+              "coreTools": [
+                "run_shell_command(gh issue list)",
+                "run_shell_command(gh pr list)",
+                "run_shell_command(gh repo view)",
+                "run_shell_command(find . -name '*.py' -o -name 'Dockerfile*' -o -name '*.yml' -o -name '*.yaml')",
+                "run_shell_command(find . -name 'Agentfile' -o -name 'Taskfile.yml' -o -name 'ME.md')",
+                "run_shell_command(git log --oneline --since='7 days ago')",
+                "run_shell_command(docker system df)",
+                "run_shell_command(ls -la)"
+              ],
+              "maxSessionTurns": 40
+            }
+          prompt: |
+            You are a repository health monitor for the pAI (Personal AI) system. Perform a comprehensive health check and provide actionable insights.
+
+            ## Repository Context
+            - **Purpose**: Collection of AI agents for personal/professional workflow automation
+            - **Architecture**: FastAgent framework with Docker containers and GitHub Actions
+            - **Structure**: Agent contexts (@Home/, @Work/) with standardized patterns
+            - **Technologies**: Python, Docker, FastAgent, MCP Protocol, GitHub Actions
+
+            ## Health Check Areas
+
+            ### 📊 **Repository Metrics**
+            - Count of active agents and their last update dates
+            - Open issues and PRs that need attention
+            - Recent commit activity and contributor engagement
+            - Documentation coverage and accuracy
+
+            ### 🏗️ **Agent Structure Health**
+            Verify each agent directory contains:
+            - `Agentfile` with proper FastAgent configuration
+            - `Taskfile.yml` with development and deployment tasks
+            - `README.md` with agent documentation
+            - Proper `ME.md` context file integration
+
+            ### 🐳 **Docker & Infrastructure Health**
+            - Check for outdated base images in Agentfiles
+            - Identify unused or duplicate Docker configurations
+            - Review MCP server configurations for consistency
+            - Assess GitHub Actions workflow efficiency
+
+            ### 🔧 **Code Quality & Maintenance**
+            - Identify agents that haven't been updated recently
+            - Check for common configuration drift between agents
+            - Find missing error handling or logging
+            - Spot potential security issues in configurations
+
+            ### 📈 **Trend Analysis**
+            - Compare current metrics to historical patterns
+            - Identify growing technical debt or maintenance issues
+            - Track agent adoption and usage patterns
+            - Monitor automation effectiveness
+
+            ## Health Report Format
+
+            Create a structured health report with:
+
+            ### **Executive Summary**
+            - Overall repository health score (1-10)
+            - Key achievements and concerns
+            - Critical action items requiring immediate attention
+
+            ### **Detailed Findings**
+            - **🟢 Healthy**: Areas performing well
+            - **🟡 Needs Attention**: Issues that should be addressed soon  
+            - **🔴 Critical**: Problems requiring immediate action
+
+            ### **Recommendations**
+            - Specific action items with priority levels
+            - Suggested automation improvements
+            - Documentation updates needed
+            - Infrastructure optimizations
+
+            ### **Metrics Dashboard**
+            ```
+            Agent Count: X active agents
+            Last Updated: X agents updated in last 7 days
+            Open Issues: X total (X critical, X normal)
+            Open PRs: X total (X needs review)
+            Health Score: X/10
+            ```
+
+            If any critical issues are found, create a GitHub issue with the `repository-health` label containing the detailed findings and recommended actions. Otherwise, post a summary comment on the most recent repository health issue or create a new discussion.
+
+            Focus on actionable insights that help maintain a healthy, well-organized pAI agent ecosystem.

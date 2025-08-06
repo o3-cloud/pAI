@@ -1,0 +1,76 @@
+name: 'Gemini Issue Triage'
+
+on:
+  issues:
+    types: ['opened', 'reopened']
+  issue_comment:
+    types: ['created']
+  schedule:
+    # Run every hour during business hours (9 AM - 5 PM EST, Mon-Fri)
+    - cron: '0 14-22 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  triage:
+    if: |
+      (github.event_name == 'issues') ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@gemini-cli /triage')) ||
+      (github.event_name == 'schedule') ||
+      (github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: read
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run Gemini Issue Triage
+        uses: google-github-actions/run-gemini-cli@v0
+        with:
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          settings: |
+            {
+              "coreTools": [
+                "run_shell_command(gh label list)",
+                "run_shell_command(gh issue list)",
+                "run_shell_command(gh issue edit)",
+                "run_shell_command(gh issue view)"
+              ],
+              "maxSessionTurns": 25
+            }
+          prompt: |
+            You are an intelligent issue triage assistant for the pAI (Personal AI) repository. This repository contains a collection of AI agents that automate personal and professional workflows using the FastAgent framework.
+
+            ## Repository Context
+            - **Architecture**: FastAgent framework with Docker-based agents
+            - **Structure**: Agents organized in @Home/ and @Work/ contexts
+            - **Technologies**: Python, Docker, GitHub Actions, MCP Protocol
+            - **Current Agents**: Gmail curator, Gmail newsletter, PR diff auditor, Test coverage advisor
+
+            ## Triage Process
+            1. **Analyze all open issues** that lack proper labels or need categorization
+            2. **Apply appropriate labels** from the existing repository labels:
+               - **Type**: `bug`, `enhancement`, `documentation`, `question`, `feature-request`
+               - **Priority**: `priority/high`, `priority/medium`, `priority/low`
+               - **Component**: `agent`, `workflow`, `infrastructure`, `mcp`, `docker`
+               - **Context**: `@home`, `@work`, `github-actions`
+               - **Status**: `needs-investigation`, `good-first-issue`, `help-wanted`
+
+            ## Classification Guidelines
+            - **Bugs**: Issues with existing functionality, errors, or unexpected behavior
+            - **Enhancements**: Improvements to existing features or agents
+            - **Feature Requests**: New agents, workflows, or major capabilities
+            - **Documentation**: README updates, guides, or documentation gaps
+            - **Infrastructure**: Docker, GitHub Actions, or deployment issues
+
+            ## Priority Assessment
+            - **High**: Security issues, broken workflows, blocking bugs
+            - **Medium**: Feature requests, performance improvements, minor bugs
+            - **Low**: Documentation updates, cosmetic improvements, nice-to-have features
+
+            Only process issues that are unlabeled or clearly need better categorization. Do not modify issues that are already properly labeled and categorized.
