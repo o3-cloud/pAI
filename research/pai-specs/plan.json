@@ -1,0 +1,34 @@
+{
+  "plan_steps": [
+    {
+      "step": "Set up prerequisites: Install Taskfile, Agentman, and obtain OpenAI API key"
+    },
+    {
+      "step": "Download setup instructions from pAI repository"
+    },
+    {
+      "step": "Use GitHub Copilot or agentic coder to follow setup instructions automatically"
+    },
+    {
+      "step": "Configure @Home context with personal automation agents (Gmail Curator, Newsletter)"
+    },
+    {
+      "step": "Configure @Work context with professional workflow agents (PR Auditor, Test Coverage)"
+    },
+    {
+      "step": "Create and customize ME.md files for personal context in each agent directory"
+    },
+    {
+      "step": "Test individual agents locally using 'task run' command"
+    },
+    {
+      "step": "Deploy agents to GitHub Actions for automated scheduling"
+    },
+    {
+      "step": "Monitor agent performance and adjust configurations as needed"
+    },
+    {
+      "step": "Expand agent library with additional custom workflows based on personal needs"
+    }
+  ]
+}

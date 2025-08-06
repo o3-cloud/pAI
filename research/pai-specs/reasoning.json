@@ -1,0 +1,14 @@
+{
+  "reasons": [
+    "FastAgent framework chosen for minimal boilerplate and rapid agent development",
+    "GitHub Actions selected as runtime platform for reliable, auditable automation with built-in scheduling",
+    "MCP Protocol adopted to standardize integrations with external services like Gmail",
+    "Taskfile used to provide consistent development workflows across all agents",
+    "Decentralized ownership model implemented to give individuals control over their own automation",
+    "Human-in-the-loop design maintained to preserve user decision-making authority",
+    "Individual context emphasis ensures agents align with personal workflows rather than generic defaults",
+    "Composable architecture enables building complex workflows from lightweight, reusable components",
+    "JSON Schema foundation provides structured, parseable AI outputs for reliable automation",
+    "Two-context organization (@Home/@Work) separates personal and professional automation concerns"
+  ]
+}
