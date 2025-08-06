@@ -174,7 +174,8 @@ pAI/
 │   └── test-coverage-advisor/ # Test coverage monitoring
 └── docs/
     ├── README.md       # This file
-    └── STACK.md        # Technology stack details
+    ├── STACK.md        # Technology stack details
+    └── specs.md        # Specs system documentation
 ```
 
 ### Running an Agent
@@ -274,6 +275,13 @@ Or deployed to GitHub Actions for automated scheduling.
 | **Security** | Protecting sensitive data in agent prompts | 🔒 Implemented |
 | **Agent Coordination** | Preventing duplicate work between agents | 🔄 In Progress |
 | **Feedback Loops** | Measuring agent effectiveness and value | 📈 Needs Improvement |
+
+---
+
+## 📖 Documentation
+
+- **[Specs System](docs/specs.md)** - Learn about the structured AI output framework that transforms unstructured content into actionable JSON data using 14 specialized extractors
+- **[Technology Stack](docs/STACK.md)** - Detailed information about the underlying technologies
 
 ---
 
