@@ -1,0 +1,16 @@
+{
+  "instructions": [
+    "Install required prerequisites: Taskfile (task runner), Agentman (agent scaffolding), and obtain OpenAI API key",
+    "Clone the pAI repository to your local development environment",
+    "Download PAI_INSTRUCTIONS.txt using: curl -o PAI_INSTRUCTIONS.txt https://raw.githubusercontent.com/o3-cloud/pai/refs/heads/main/LLM.txt",
+    "Configure your OpenAI API key as an environment variable: export OPENAI_API_KEY='your-api-key-here'",
+    "Navigate to your desired agent directory, for example: cd @Home/gmail-curator",
+    "Review and customize the ME.md context file to reflect your personal preferences and workflow patterns",
+    "Execute the agent locally using the Taskfile: task run (this runs both prompt generation and agent execution)",
+    "Monitor the agent output and logs to verify correct operation and expected behavior",
+    "For production deployment, configure GitHub Actions workflows with proper secrets and scheduling",
+    "Set up agent monitoring by reviewing logs and adjusting configurations based on performance feedback",
+    "Scale by adding additional agents from different contexts (@Home or @Work) as needed for your workflow",
+    "Maintain system health by regularly updating ME.md files and monitoring token usage costs"
+  ]
+}

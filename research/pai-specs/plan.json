@@ -1,0 +1,14 @@
+{
+  "plan_steps": [
+    {"step": "Set up prerequisites including Taskfile, Agentman, and OpenAI API key"},
+    {"step": "Download PAI_INSTRUCTIONS.txt from the repository for guided setup"},
+    {"step": "Navigate to desired agent directory (e.g., @Home/gmail-curator)"},
+    {"step": "Run 'task run' to execute the complete agent workflow"},
+    {"step": "Configure ME.md context files for personalized agent behavior"},
+    {"step": "Deploy agents to GitHub Actions for automated scheduling"},
+    {"step": "Monitor agent performance and token usage"},
+    {"step": "Expand functionality by implementing planned agents (PR Diff Auditor, Test Coverage Advisor)"},
+    {"step": "Build shared utilities and agent library for reusable patterns"},
+    {"step": "Implement cross-agent communication and shared context capabilities"}
+  ]
+}

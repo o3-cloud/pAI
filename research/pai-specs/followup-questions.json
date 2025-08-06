@@ -1,0 +1,14 @@
+{
+  "follow_up_questions": [
+    "What is the estimated monthly cost for running a typical pAI agent deployment with multiple active agents?",
+    "How does the system handle authentication and permissions for agents accessing sensitive email or code repositories?",
+    "What happens when two agents try to perform conflicting actions on the same resource simultaneously?",
+    "Are there any performance benchmarks or success metrics from the current Gmail Curator and Gmail Newsletter implementations?",
+    "How does the FastAgent framework compare to other AI agent frameworks in terms of capabilities and limitations?",
+    "What specific security measures are in place to prevent sensitive data from being logged or exposed?",
+    "How can organizations ensure compliance with data privacy regulations when using pAI agents?",
+    "What is the recommended approach for testing and validating agent behavior before production deployment?",
+    "How does the system handle API rate limits and failures from external services like OpenAI or Gmail?",
+    "What training or documentation is available for teams wanting to adopt the pAI framework at scale?"
+  ]
+}

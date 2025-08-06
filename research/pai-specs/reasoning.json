@@ -1,0 +1,14 @@
+{
+  "reasons": [
+    "Personal context drives better automation outcomes than generic, one-size-fits-all solutions",
+    "GitHub Actions provides reliable, event-driven infrastructure that's already familiar to developers",
+    "FastAgent framework minimizes boilerplate code and accelerates agent development cycles",
+    "Decentralized ownership ensures individuals maintain control over their personal automation systems",
+    "Human-in-the-loop design prevents autonomous agents from making critical decisions without oversight",
+    "Composable architecture enables flexible combinations and evolution of agent capabilities over time",
+    "Separation of @Home and @Work contexts maintains appropriate boundaries between personal and professional automation",
+    "Taskfile standardization ensures consistent development workflows across all agent implementations",
+    "MCP protocol provides standardized integration patterns for external services like Gmail and other APIs",
+    "Auditable logging and permission systems enable transparency and security in automated decision-making"
+  ]
+}

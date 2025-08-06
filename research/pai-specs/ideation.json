@@ -1,0 +1,16 @@
+{
+  "ideas": [
+    "Calendar Integration Agent: Automatically schedule focus time blocks based on email patterns and project deadlines",
+    "Code Quality Sentinel: Monitors repository health metrics and suggests refactoring opportunities proactively",
+    "Standup Assistant: Generates personalized daily standup summaries from Git commits, calendar, and task management tools",
+    "Knowledge Graph Agent: Builds and maintains a personal knowledge base from documents, emails, and meeting notes",
+    "Expense Tracker Agent: Automatically categorizes and reports business expenses from email receipts and calendar events",
+    "Learning Curator: Identifies relevant articles, tutorials, and courses based on current projects and skill gaps",
+    "Team Health Monitor: Tracks team communication patterns and suggests interventions for collaboration improvement",
+    "Security Audit Agent: Continuously monitors system configurations and access patterns for security anomalies",
+    "Documentation Maintainer: Automatically updates project documentation based on code changes and team decisions",
+    "Performance Optimizer: Analyzes system metrics and suggests infrastructure or code optimizations",
+    "Meeting Preparation Agent: Gathers relevant context and talking points before scheduled meetings",
+    "Dependency Watcher: Monitors project dependencies for security vulnerabilities and update recommendations"
+  ]
+}
