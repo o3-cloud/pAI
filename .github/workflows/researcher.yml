@@ -1,4 +1,4 @@
-name: Claude Code
+name: Researcher
 
 on:
   issue_comment:
@@ -28,8 +28,8 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Research
-        id: claude
+      - name: Researcher
+        id: research
         uses: anthropics/claude-code-action@beta
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -38,19 +38,9 @@ jobs:
           allowed_tools: Bash   
           custom_instructions: |
             1. Research the defined subject
-            2. Use the specs/extractors extract information from the research as json
-            3. Save the extractor artifacts to ./research/<subject>/<spec>.json
-
-      - name: Report
-        id: report
-        uses: anthropics/claude-code-action@beta
-        with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          github_token: ${{ secrets.GH_PAT }}
-          trigger_phrase: "/research"
-          allowed_tools: Bash          
-          custom_instructions: |
-            1. Collect the json files from ./research/<subject>
-            2. Compile the collected json into a markdown formatted report
-            3. Save the report to ./research/<subject>/report.md
-
+            2. Only use the specs specified by the user.
+            3. If no specs are specified ask the user to clarify before proceeding.
+            4. Use the json schema specs to extract information from the research as json
+            5. Save the extractor artifacts to ./research/<subject>/<spec>.json
+            6. Use the collected json to generate a markdown formatted report
+            7. Save the report to ./research/<subject>/report.md
