@@ -1,0 +1,20 @@
+default_model: gpt-4.1-mini
+logger:
+  level: info
+  progress_display: true
+  show_chat: true
+  show_tools: true
+  truncate_tools: true
+mcp:
+  servers:
+    fetch:
+      transport: stdio
+      command: uvx
+      args:
+      - mcp-server-fetch
+    filesystem:
+      transport: stdio
+      command: npx
+      args:
+      - '@modelcontextprotocol/server-filesystem'
+      - /workspace

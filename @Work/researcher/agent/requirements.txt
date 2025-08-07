@@ -1,0 +1,2 @@
+deprecated>=1.2.18
+fast-agent-mcp>=0.2.33

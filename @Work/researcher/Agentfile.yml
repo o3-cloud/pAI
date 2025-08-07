@@ -1,0 +1,132 @@
+base:
+  model: gpt-4.1-mini
+mcp_servers:
+- name: fetch
+  command: uvx
+  args:
+  - mcp-server-fetch
+  transport: stdio
+
+- name: filesystem
+  command: npx
+  args:
+  - "@modelcontextprotocol/server-filesystem"
+  - /workspace
+
+agents:
+- name: url_analyzer
+  instruction: Given a URL, provide a comprehensive summary of the content
+  servers:
+  - fetch
+
+- name: research_evaluator
+  instruction: |
+    Evaluate the research quality and relevance of the extracted information.
+    Suggest a new url to search if possible. 
+    - Provide a rating (EXCELLENT, GOOD, FAIR, or POOR).
+    - Offer specific feedback or suggestions for improvement.
+
+- name: extract_questions
+  instruction: Extract questions
+  output_format:
+    type: schema_file
+    file: ./specs/extractors/followup-questions.schema.json
+
+- name: extract_facts
+  instruction: Extract facts
+  output_format:
+    type: schema_file
+    file: ./specs/extractors/facts.schema.json
+
+- name: extract_missing_info
+  instruction: Extract missing info
+  output_format:
+    type: schema_file
+    file: ./specs/extractors/missing-info.schema.json
+
+- name: extract_tags
+  instruction: Extract missing info
+  output_format:
+    type: schema_file
+    file: ./specs/extractors/tags.schema.json
+
+- name: extract_summary
+  instruction: Extract summary
+  output_format:
+    type: schema_file
+    file: ./specs/extractors/summary.schema.json
+
+- name: extract_suggestions
+  instruction: Extract suggestions
+  output_format:
+    type: schema_file
+    file: ./specs/extractors/suggestions.schema.json
+
+- name: extract_graph
+  instruction: Extract a knowledge graph of key concepts
+  output_format:
+    type: schema_file
+    file: ./specs/extractors/graph.schema.json
+
+- name: extract_risks
+  instruction: Extract risks
+  output_format:
+    type: schema_file
+    file: ./specs/extractors/risks.schema.json
+
+- name: extract_links
+  instructions: Extract links
+  output_format:
+    type: schema_file
+    file: ./specs/extractors/links.schema.json
+
+- name: extract_action_items
+  instructions: Extract action items
+  output_format:
+    type: schema_file
+    file: ./specs/extractors/action-items.schema.json
+
+- name: reporter
+  model: gpt-4.1
+  instruction: |
+    - Combind the json data todgether into a report.
+    - Format report as markdown.
+    - Visualize knowledge using mermaidjs
+    - Save the report to /workspace/reports.md
+  servers:
+  - filesystem
+
+evaluator_optimizers:
+- name: researcher
+  generator: url_analyzer
+  evaluator: research_evaluator
+  min_rating: EXCELLENT
+  max_refinements: 3
+
+chains:
+- name: default
+  sequence:
+  - researcher
+  - extractors
+
+parallels:
+- name: extractors
+  include_request: false
+  fan_in: reporter
+  fan_out:
+  - extract_questions
+  - extract_facts
+  - extract_summary
+  - extract_tags
+  - extract_missing_info
+  - extract_suggestions
+  - extract_risks
+  - extract_links
+  - extract_graph
+  - extract_action_items
+
+command:
+  - python
+  - agent.py
+  - -p
+  - prompt.txt

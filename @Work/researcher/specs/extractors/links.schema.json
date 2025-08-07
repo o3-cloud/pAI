@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Links",
+    "type": "object",
+    "properties": {
+        "references": {
+            "type": "array",
+            "description": "A list of reference objects containing titles and URLs. Do not include hallucinated or made-up references; ensure all references are accurate and verifiable.",
+            "items": {
+                "type": "object",
+                "description": "A reference with a title and a URL. Avoid hallucination and misinformation; only provide real, factual references.",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "description": "The title or name of the reference. Do not invent or hallucinate titles; use only accurate information."
+                    },
+                    "url": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "The URL pointing to the reference resource. Ensure the URL is real and not fabricated; avoid misinformation."
+                    }
+                },
+                "required": ["title", "url"]
+            }
+        }
+    }
+}

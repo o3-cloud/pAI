@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FollowUpQuestionList",
+  "type": "object",
+  "description": "A list of follow-up questions extracted from a text.",
+  "properties": {
+    "follow_up_questions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "A single follow-up question."
+      }
+    }
+  },
+  "required": ["follow_up_questions"]
+}
