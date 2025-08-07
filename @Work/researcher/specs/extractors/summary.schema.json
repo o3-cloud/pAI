@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Summary",
+  "type": "object",
+  "description": "A summary of the content extracted from a text.",
+  "properties": {
+    "summary": {
+      "type": "string",
+      "description": "A brief summary of the given content."
+    }
+  },
+  "required": ["summary"]
+}

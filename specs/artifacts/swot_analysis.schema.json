@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SWOTAnalysisReport",
+  "type": "object",
+  "description": "A report summarizing the SWOT (Strengths, Weaknesses, Opportunities, Threats) analysis findings.",
+  "properties": {
+    "strengths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "A positive attribute, skill, or advantage."
+      }
+    },
+    "weaknesses": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "A weakness, limitation, or area for improvement."
+      }
+    },
+    "opportunities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "A potential opportunity for growth, improvement, or action."
+      }
+    },
+    "threats": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "A potential threat, risk, or challenge."
+      }
+    }
+  },
+  "required": ["strengths", "weaknesses", "opportunities", "threats"]
+}

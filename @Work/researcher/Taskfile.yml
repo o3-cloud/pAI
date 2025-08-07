@@ -1,0 +1,12 @@
+version: 3
+tasks:
+  context:
+    cmds:
+    - echo "{{.PROMPT}}" > prompt.txt
+  agent:
+    cmds:
+    - agentman run -e OPENAI_API_KEY -v $PWD:/workspace --from-agentfile -f Agentfile.yml
+  run:
+    cmds:
+    - task: context
+    - task: agent
