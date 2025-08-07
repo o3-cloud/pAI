@@ -72,6 +72,22 @@ git clone https://github.com/o3-cloud/pAI.git
 cd pAI
 ```
 
+### Decouple from Original Repository
+To make this project your own, remove the original remote:
+```bash
+git remote remove origin
+```
+
+### Add Your New Remote Origin
+Create a new GitHub repository (e.g., via https://github.com/new) and set it as your origin:
+```bash
+git remote add origin <your-new-github-repo-url>
+```
+Replace `<your-new-github-repo-url>` with your new repository URL (e.g., `https://github.com/your-username/pAI.git`).
+
+**What will your new origin's GitHub repo URL be?**
+Make sure to update the above command with your chosen URL.
+
 ### Verify Repository URL
 Check that you're in the correct repository:
 ```bash
