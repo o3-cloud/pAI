@@ -1,83 +1,74 @@
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "title": "ProductRequirementsDocument",
-    "type": "object",
-    "properties": {
-        "product_name": {
-            "type": "string",
-            "description": "Name of the product."
-        },
-        "overview": {
-            "type": "string",
-            "description": "Brief overview of the product."
-        },
-        "objectives": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            },
-            "description": "List of product objectives."
-        },
-        "features": {
-            "type": "array",
-            "description": "List of product features.",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "Feature name."
-                    },
-                    "description": {
-                        "type": "string",
-                        "description": "Feature description."
-                    },
-                    "priority": {
-                        "type": "string",
-                        "enum": [
-                            "High",
-                            "Medium",
-                            "Low"
-                        ],
-                        "description": "Feature priority."
-                    },
-                    "acceptance_criteria": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "description": "Acceptance criteria for the feature."
-                    }
-                },
-                "required": [
-                    "name",
-                    "description"
-                ]
-            }
-        },
-        "stakeholders": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            },
-            "description": "List of stakeholders."
-        },
-        "timeline": {
-            "type": "string",
-            "description": "Project timeline or key milestones."
-        },
-        "metrics": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            },
-            "description": "Success metrics for the product."
-        }
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProductRequirementsDocument",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Title of the PRD or feature"
     },
-    "required": [
-        "product_name",
-        "overview",
-        "objectives",
-        "features"
-    ]
+    "overview": {
+      "type": "string",
+      "description": "A high-level summary of what this product or feature is about"
+    },
+    "goals": {
+      "type": "array",
+      "description": "List of goals this PRD aims to achieve",
+      "items": { "type": "string" }
+    },
+    "non_goals": {
+      "type": "array",
+      "description": "List of what is explicitly out of scope",
+      "items": { "type": "string" }
+    },
+    "user_stories": {
+      "type": "array",
+      "description": "User stories defining how users interact with the feature",
+      "items": {
+        "type": "object",
+        "properties": {
+          "role": { "type": "string" },
+          "goal": { "type": "string" },
+          "reason": { "type": "string" }
+        },
+        "required": ["role", "goal"]
+      }
+    },
+    "requirements": {
+      "type": "array",
+      "description": "Detailed functional or technical requirements",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "description": { "type": "string" },
+          "priority": { "type": "string", "enum": ["high", "medium", "low"] }
+        },
+        "required": ["id", "description"]
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "Other teams, services, or features this depends on",
+      "items": { "type": "string" }
+    },
+    "milestones": {
+      "type": "array",
+      "description": "Key delivery milestones",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "date": { "type": "string", "format": "date" }
+        },
+        "required": ["name"]
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "description": "Success metrics to evaluate feature impact",
+      "items": { "type": "string" }
+    }
+  },
+  "required": ["title", "overview", "goals", "user_stories", "requirements"]
 }

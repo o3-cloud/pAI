@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "SimpleGraphAssociation",
+    "description": "A simple graph structure. Only include nodes and edges explicitly provided in the source data. Do not infer, hallucinate, or fabricate any information.",
+    "type": "object",
+    "properties": {
+      "nodes": {
+        "type": "array",
+        "description": "A list of node identifiers. Only include nodes that are explicitly present in the source data. Do not invent or infer nodes.",
+        "items": {
+          "type": "string"
+        }
+      },
+      "edges": {
+        "type": "array",
+        "description": "A list of edges connecting nodes. Only include edges that are explicitly present in the source data. Do not invent or infer relationships.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "The source node identifier. Must match a node in the 'nodes' array. Do not invent or infer sources."
+            },
+            "target": {
+              "type": "string",
+              "description": "The target node identifier. Must match a node in the 'nodes' array. Do not invent or infer targets."
+            },
+            "relationship": {
+              "type": "string",
+              "description": "Defines the relationship between the source and target nodes. Only include relationships explicitly stated in the source data. Do not hallucinate or fabricate relationships."
+            }
+          },
+          "required": ["source", "target"]
+        }
+      }
+    },
+    "required": ["nodes", "edges"]
+}
