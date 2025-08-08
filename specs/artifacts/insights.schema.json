@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "InsightExtractionReport",
+  "type": "object",
+  "description": "A comprehensive report extracting summaries, ideas, insights, quotes, habits, facts, references, recommendations, and takeaways from input content, with strict formatting and quantity requirements.",
+  "properties": {
+    "summary": {
+      "type": "string",
+      "description": "A 25-word summary of the content, including who is presenting and the main topics discussed."
+    },
+    "ideas": {
+      "type": "array",
+      "description": "A list of 20-50 surprising, insightful, and interesting ideas. Each bullet must be exactly 16 words. Extract at least 25.",
+      "minItems": 20,
+      "maxItems": 50,
+      "items": {
+        "type": "string",
+        "minLength": 16,
+        "description": "A surprising, insightful, or interesting idea from the input, exactly 16 words."
+      }
+    },
+    "insights": {
+      "type": "array",
+      "description": "A list of 10-20 refined, abstracted, and insightful observations based on the ideas and content. Each bullet is exactly 16 words.",
+      "minItems": 10,
+      "maxItems": 20,
+      "items": {
+        "type": "string",
+        "minLength": 16,
+        "description": "A highly refined and insightful observation, exactly 16 words."
+      }
+    },
+    "quotes": {
+      "type": "array",
+      "description": "A list of 15-30 surprising, insightful, or interesting direct quotes from the content. Each quote ends with the speaker's name.",
+      "minItems": 15,
+      "maxItems": 30,
+      "items": {
+        "type": "string",
+        "description": "An exact quote from the input, ending with the name of the speaker."
+      }
+    },
+    "habits": {
+      "type": "array",
+      "description": "A list of 15-30 practical and useful personal habits mentioned or modeled by speakers. Each bullet is exactly 16 words.",
+      "minItems": 15,
+      "maxItems": 30,
+      "items": {
+        "type": "string",
+        "minLength": 16,
+        "description": "A practical personal habit, exactly 16 words."
+      }
+    },
+    "facts": {
+      "type": "array",
+      "description": "A list of 15-30 surprising, insightful, or interesting valid facts about the world mentioned in the content. Each bullet is exactly 16 words.",
+      "minItems": 15,
+      "maxItems": 30,
+      "items": {
+        "type": "string",
+        "minLength": 16,
+        "description": "A valid fact about the world, exactly 16 words."
+      }
+    },
+    "references": {
+      "type": "array",
+      "description": "A list of all mentions of writing, art, tools, projects, or other sources of inspiration cited by speakers.",
+      "items": {
+        "type": "string",
+        "description": "A reference mentioned by the speaker."
+      }
+    },
+    "one_sentence_takeaway": {
+      "type": "string",
+      "description": "A single, potent, 15-word sentence capturing the most important essence and recommendation from the content."
+    },
+    "recommendations": {
+      "type": "array",
+      "description": "A list of 15-30 surprising, insightful, or interesting recommendations, each exactly 16 words.",
+      "minItems": 15,
+      "maxItems": 30,
+      "items": {
+        "type": "string",
+        "minLength": 16,
+        "description": "A recommendation distilled from the content, exactly 16 words."
+      }
+    }
+  },
+  "required": [
+    "summary",
+    "ideas",
+    "insights",
+    "quotes",
+    "habits",
+    "facts",
+    "references",
+    "one_sentence_takeaway",
+    "recommendations"
+  ]
+}

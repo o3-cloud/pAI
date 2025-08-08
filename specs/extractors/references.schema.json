@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExtractedReferences",
+  "type": "object",
+  "description": "References extracted from text. ONLY extract references explicitly mentioned - do not generate or infer.",
+  "properties": {
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string",
+            "description": "Reference text EXACTLY as it appears in source. Do not modify or reformat."
+          },
+          "type": {
+            "type": "string",
+            "description": "Type based on explicit indicators only. Use 'unknown' if unclear.",
+            "enum": ["book", "article", "website", "report", "unknown"]
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL only if explicitly provided in source text."
+          },
+          "notes": {
+            "type": "string",
+            "description": "Flag any ambiguities or extraction issues."
+          }
+        },
+        "required": ["reference"]
+      }
+    }
+  },
+  "required": ["references"]
+}
