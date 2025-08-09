@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MeetingAgenda",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Title of the meeting."
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time of the meeting (ISO 8601 format)."
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Duration of the meeting in minutes.",
+      "minimum": 1
+    },
+    "location": {
+      "type": "string",
+      "description": "Meeting location or virtual meeting link."
+    },
+    "organizer": {
+      "type": "string",
+      "description": "Person organizing the meeting."
+    },
+    "attendees": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Attendee name."
+          },
+          "role": {
+            "type": "string",
+            "description": "Attendee role or title."
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Whether attendance is required.",
+            "default": false
+          }
+        },
+        "required": ["name"]
+      },
+      "description": "List of meeting attendees."
+    },
+    "objectives": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Meeting objectives or goals."
+    },
+    "agenda_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Agenda item title."
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the agenda item."
+          },
+          "presenter": {
+            "type": "string",
+            "description": "Person presenting this item."
+          },
+          "duration": {
+            "type": "integer",
+            "description": "Allocated time for this item in minutes.",
+            "minimum": 1
+          },
+          "type": {
+            "type": "string",
+            "enum": ["discussion", "presentation", "decision", "update", "brainstorm", "review"],
+            "description": "Type of agenda item."
+          },
+          "materials": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Pre-reading materials or documents needed."
+          }
+        },
+        "required": ["title"]
+      },
+      "description": "List of agenda items to be covered."
+    },
+    "preparation_notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Notes on what attendees should prepare beforehand."
+    },
+    "follow_up_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "item": {
+            "type": "string",
+            "description": "Follow-up item description."
+          },
+          "assignee": {
+            "type": "string",
+            "description": "Person responsible for follow-up."
+          },
+          "due_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Due date for follow-up (ISO 8601 date format)."
+          }
+        },
+        "required": ["item"]
+      },
+      "description": "Items that require follow-up after the meeting."
+    }
+  },
+  "required": ["title", "date", "agenda_items"]
+}
