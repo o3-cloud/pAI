@@ -1,0 +1,55 @@
+# Example workflow for using OpenCode AI Assistant
+# Copy this to .github/workflows/opencode.yml in your repository
+
+name: OpenCode AI Assistant
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  pull_request_review:
+    types: [submitted]
+  issues:
+    types: [opened, assigned]
+  pull_request:
+    types: [opened]
+
+jobs:
+  opencode:
+    # Only run when @opencode is mentioned
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@opencode')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@opencode')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@opencode')) ||
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@opencode') || contains(github.event.issue.title, '@opencode'))) ||
+      (github.event_name == 'pull_request' && (github.event.action == 'opened' || contains(github.event.pull_request.body, '@opencode')))
+    
+    runs-on: ubuntu-latest
+    
+    # Required permissions
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+      id-token: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run OpenCode AI Assistant
+        uses: o3-cloud/pAI/opencode-action@main
+        with:
+          # Required: OpenAI API key (add to repository secrets)
+          api_key: ${{ secrets.OPENAI_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          
+          # Optional configurations (uncomment to customize)
+          # model: "gpt-4-turbo-preview"
+          # provider: "openai"
+          # trigger_phrase: "/opencode"
+          # max_turns: 5
+          # allowed_tools: "code_review,suggestions,bug_analysis,documentation"
