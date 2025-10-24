@@ -1,0 +1,85 @@
+{
+  "title": "Q4 Planning Meeting",
+  "date": "2025-08-15T14:00:00Z",
+  "duration": 90,
+  "location": "Conference Room A / Zoom: https://company.zoom.us/j/123456789",
+  "organizer": "Sarah Johnson",
+  "attendees": [
+    {
+      "name": "Sarah Johnson",
+      "role": "Product Manager",
+      "required": true
+    },
+    {
+      "name": "Mike Chen",
+      "role": "Engineering Lead",
+      "required": true
+    },
+    {
+      "name": "Anna Rodriguez",
+      "role": "Designer",
+      "required": false
+    }
+  ],
+  "objectives": [
+    "Define Q4 product roadmap priorities",
+    "Align on resource allocation",
+    "Identify potential risks and mitigation strategies"
+  ],
+  "agenda_items": [
+    {
+      "title": "Welcome and Introductions",
+      "description": "Brief introductions and meeting overview",
+      "presenter": "Sarah Johnson",
+      "duration": 10,
+      "type": "update"
+    },
+    {
+      "title": "Q3 Retrospective",
+      "description": "Review Q3 achievements and lessons learned",
+      "presenter": "Mike Chen",
+      "duration": 20,
+      "type": "review",
+      "materials": ["Q3 Sprint Report", "Customer Feedback Summary"]
+    },
+    {
+      "title": "Q4 Feature Prioritization",
+      "description": "Discuss and prioritize features for Q4 development",
+      "presenter": "Sarah Johnson",
+      "duration": 30,
+      "type": "decision",
+      "materials": ["Feature Request Backlog", "Market Analysis Report"]
+    },
+    {
+      "title": "Resource Planning",
+      "description": "Review team capacity and resource requirements",
+      "presenter": "Mike Chen",
+      "duration": 20,
+      "type": "discussion"
+    },
+    {
+      "title": "Next Steps and Action Items",
+      "description": "Define clear action items and owners",
+      "presenter": "Sarah Johnson",
+      "duration": 10,
+      "type": "decision"
+    }
+  ],
+  "preparation_notes": [
+    "Review Q3 performance metrics",
+    "Come prepared with top 3 feature requests from your team",
+    "Review resource availability for Q4"
+  ],
+  "follow_up_items": [
+    {
+      "item": "Finalize Q4 roadmap document",
+      "assignee": "Sarah Johnson",
+      "due_date": "2025-08-18"
+    },
+    {
+      "item": "Create detailed technical specifications",
+      "assignee": "Mike Chen",
+      "due_date": "2025-08-22"
+    }
+  ]
+}
