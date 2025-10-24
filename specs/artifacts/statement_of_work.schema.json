@@ -1,0 +1,613 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StatementOfWork",
+  "type": "object",
+  "description": "A formal document that defines project-specific activities, deliverables, and timelines for a vendor providing services to a client.",
+  "properties": {
+    "document_info": {
+      "type": "object",
+      "description": "Basic document information and metadata.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the Statement of Work document."
+        },
+        "sow_number": {
+          "type": "string",
+          "description": "Unique identifier for this SOW document."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version number of this SOW."
+        },
+        "date_created": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the SOW was created."
+        },
+        "date_effective": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the SOW becomes effective."
+        },
+        "date_expires": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the SOW expires."
+        }
+      },
+      "required": ["title", "sow_number", "date_created"]
+    },
+    "parties": {
+      "type": "object",
+      "description": "Information about the client and vendor parties.",
+      "properties": {
+        "client": {
+          "type": "object",
+          "description": "Client organization information.",
+          "properties": {
+            "organization_name": {
+              "type": "string",
+              "description": "Name of the client organization."
+            },
+            "contact_person": {
+              "type": "string",
+              "description": "Primary contact person for the client."
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "description": "Email address of the primary contact."
+            },
+            "phone": {
+              "type": "string",
+              "description": "Phone number of the primary contact."
+            },
+            "address": {
+              "type": "string",
+              "description": "Business address of the client organization."
+            }
+          },
+          "required": ["organization_name", "contact_person", "email"]
+        },
+        "vendor": {
+          "type": "object",
+          "description": "Vendor organization information.",
+          "properties": {
+            "organization_name": {
+              "type": "string",
+              "description": "Name of the vendor organization."
+            },
+            "contact_person": {
+              "type": "string",
+              "description": "Primary contact person for the vendor."
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "description": "Email address of the primary contact."
+            },
+            "phone": {
+              "type": "string",
+              "description": "Phone number of the primary contact."
+            },
+            "address": {
+              "type": "string",
+              "description": "Business address of the vendor organization."
+            }
+          },
+          "required": ["organization_name", "contact_person", "email"]
+        }
+      },
+      "required": ["client", "vendor"]
+    },
+    "project_overview": {
+      "type": "object",
+      "description": "High-level description and context of the project.",
+      "properties": {
+        "project_name": {
+          "type": "string",
+          "description": "Name or title of the project."
+        },
+        "background": {
+          "type": "string",
+          "description": "Background information and context for the project."
+        },
+        "objectives": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of project objectives and goals."
+        },
+        "success_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Criteria that define project success."
+        }
+      },
+      "required": ["project_name", "background", "objectives"]
+    },
+    "scope": {
+      "type": "object",
+      "description": "Detailed scope of work including what is and is not included.",
+      "properties": {
+        "in_scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of activities, services, and deliverables included in the scope."
+        },
+        "out_of_scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of activities, services, and deliverables explicitly excluded from the scope."
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Assumptions made in defining the scope of work."
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Known constraints that may impact the project."
+        }
+      },
+      "required": ["in_scope"]
+    },
+    "deliverables": {
+      "type": "array",
+      "description": "List of specific deliverables to be provided.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the deliverable."
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the deliverable."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["Document", "Software", "Service", "Training", "Report", "Analysis", "Other"],
+            "description": "Type of deliverable."
+          },
+          "format": {
+            "type": "string",
+            "description": "Format or medium of the deliverable."
+          },
+          "due_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Due date for the deliverable."
+          },
+          "acceptance_criteria": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Criteria for accepting the deliverable."
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Dependencies required for this deliverable."
+          }
+        },
+        "required": ["name", "description", "type", "due_date"]
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "description": "Project timeline and key milestones.",
+      "properties": {
+        "start_date": {
+          "type": "string",
+          "format": "date",
+          "description": "Project start date."
+        },
+        "end_date": {
+          "type": "string",
+          "format": "date",
+          "description": "Project end date."
+        },
+        "milestones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the milestone."
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of the milestone."
+              },
+              "date": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of the milestone."
+              },
+              "deliverables": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Deliverables associated with this milestone."
+              }
+            },
+            "required": ["name", "date"]
+          },
+          "description": "Key project milestones."
+        },
+        "phases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the project phase."
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of activities in this phase."
+              },
+              "start_date": {
+                "type": "string",
+                "format": "date",
+                "description": "Phase start date."
+              },
+              "end_date": {
+                "type": "string",
+                "format": "date",
+                "description": "Phase end date."
+              },
+              "deliverables": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Deliverables for this phase."
+              }
+            },
+            "required": ["name", "start_date", "end_date"]
+          },
+          "description": "Project phases if applicable."
+        }
+      },
+      "required": ["start_date", "end_date"]
+    },
+    "resources": {
+      "type": "object",
+      "description": "Resources required for the project.",
+      "properties": {
+        "team_members": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the team member."
+              },
+              "role": {
+                "type": "string",
+                "description": "Role or title of the team member."
+              },
+              "organization": {
+                "type": "string",
+                "enum": ["Client", "Vendor"],
+                "description": "Which organization the team member belongs to."
+              },
+              "responsibilities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Key responsibilities of this team member."
+              },
+              "time_commitment": {
+                "type": "string",
+                "description": "Expected time commitment (e.g., 'Full-time', '50%', '10 hours/week')."
+              }
+            },
+            "required": ["name", "role", "organization"]
+          },
+          "description": "Team members involved in the project."
+        },
+        "equipment": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Equipment or tools required for the project."
+        },
+        "facilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Facilities or locations required for the project."
+        }
+      }
+    },
+    "pricing": {
+      "type": "object",
+      "description": "Pricing structure and payment terms.",
+      "properties": {
+        "pricing_model": {
+          "type": "string",
+          "enum": ["Fixed Price", "Time and Materials", "Milestone-based", "Retainer", "Cost Plus", "Hybrid"],
+          "description": "Pricing model for the project."
+        },
+        "total_cost": {
+          "type": "number",
+          "description": "Total project cost if using fixed pricing."
+        },
+        "currency": {
+          "type": "string",
+          "description": "Currency for all pricing (e.g., 'USD', 'EUR', 'GBP')."
+        },
+        "cost_breakdown": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "type": "string",
+                "description": "Cost category (e.g., 'Labor', 'Materials', 'Travel', 'Equipment')."
+              },
+              "amount": {
+                "type": "number",
+                "description": "Amount for this cost category."
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of what is included in this cost category."
+              }
+            },
+            "required": ["category", "amount"]
+          },
+          "description": "Breakdown of costs by category."
+        },
+        "hourly_rates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Role or skill level."
+              },
+              "rate": {
+                "type": "number",
+                "description": "Hourly rate for this role."
+              }
+            },
+            "required": ["role", "rate"]
+          },
+          "description": "Hourly rates by role if using time and materials pricing."
+        },
+        "payment_schedule": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "milestone": {
+                "type": "string",
+                "description": "Milestone or trigger for payment."
+              },
+              "amount": {
+                "type": "number",
+                "description": "Payment amount."
+              },
+              "percentage": {
+                "type": "number",
+                "description": "Percentage of total cost if applicable."
+              },
+              "due_date": {
+                "type": "string",
+                "format": "date",
+                "description": "Payment due date."
+              }
+            },
+            "required": ["milestone", "amount"]
+          },
+          "description": "Payment schedule and milestones."
+        }
+      },
+      "required": ["pricing_model", "currency"]
+    },
+    "terms_and_conditions": {
+      "type": "object",
+      "description": "Legal and contractual terms.",
+      "properties": {
+        "contract_reference": {
+          "type": "string",
+          "description": "Reference to the master service agreement or contract that governs this SOW."
+        },
+        "intellectual_property": {
+          "type": "string",
+          "description": "Intellectual property ownership and licensing terms."
+        },
+        "confidentiality": {
+          "type": "string",
+          "description": "Confidentiality and non-disclosure requirements."
+        },
+        "liability_limitations": {
+          "type": "string",
+          "description": "Liability limitations and risk allocation."
+        },
+        "termination_clause": {
+          "type": "string",
+          "description": "Conditions under which the SOW can be terminated."
+        },
+        "change_management": {
+          "type": "string",
+          "description": "Process for managing changes to the scope or terms."
+        },
+        "dispute_resolution": {
+          "type": "string",
+          "description": "Process for resolving disputes."
+        },
+        "governing_law": {
+          "type": "string",
+          "description": "Governing law and jurisdiction."
+        }
+      }
+    },
+    "communication": {
+      "type": "object",
+      "description": "Communication protocols and reporting requirements.",
+      "properties": {
+        "meeting_schedule": {
+          "type": "string",
+          "description": "Regular meeting schedule and format."
+        },
+        "reporting_frequency": {
+          "type": "string",
+          "enum": ["Daily", "Weekly", "Bi-weekly", "Monthly", "Milestone-based", "As-needed"],
+          "description": "Frequency of status reporting."
+        },
+        "reporting_format": {
+          "type": "string",
+          "description": "Format and content requirements for status reports."
+        },
+        "escalation_process": {
+          "type": "string",
+          "description": "Process for escalating issues or concerns."
+        },
+        "communication_tools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Tools and platforms to be used for communication."
+        }
+      }
+    },
+    "risks_and_mitigation": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "risk_description": {
+            "type": "string",
+            "description": "Description of the identified risk."
+          },
+          "probability": {
+            "type": "string",
+            "enum": ["Low", "Medium", "High"],
+            "description": "Probability of the risk occurring."
+          },
+          "impact": {
+            "type": "string",
+            "enum": ["Low", "Medium", "High"],
+            "description": "Impact if the risk occurs."
+          },
+          "mitigation_strategy": {
+            "type": "string",
+            "description": "Strategy for mitigating or managing the risk."
+          },
+          "owner": {
+            "type": "string",
+            "description": "Person or party responsible for managing this risk."
+          }
+        },
+        "required": ["risk_description", "probability", "impact", "mitigation_strategy"]
+      },
+      "description": "Identified risks and mitigation strategies."
+    },
+    "acceptance_criteria": {
+      "type": "object",
+      "description": "Overall project acceptance criteria and sign-off process.",
+      "properties": {
+        "acceptance_process": {
+          "type": "string",
+          "description": "Process for accepting deliverables and the overall project."
+        },
+        "testing_requirements": {
+          "type": "string",
+          "description": "Testing and quality assurance requirements."
+        },
+        "sign_off_authority": {
+          "type": "string",
+          "description": "Who has authority to accept and sign off on deliverables."
+        },
+        "warranty_period": {
+          "type": "string",
+          "description": "Warranty or support period after project completion."
+        }
+      }
+    },
+    "signatures": {
+      "type": "object",
+      "description": "Signature information for contract execution.",
+      "properties": {
+        "client_signatory": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the person signing for the client."
+            },
+            "title": {
+              "type": "string",
+              "description": "Title of the client signatory."
+            },
+            "signature_date": {
+              "type": "string",
+              "format": "date",
+              "description": "Date of client signature."
+            }
+          },
+          "required": ["name", "title"]
+        },
+        "vendor_signatory": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the person signing for the vendor."
+            },
+            "title": {
+              "type": "string",
+              "description": "Title of the vendor signatory."
+            },
+            "signature_date": {
+              "type": "string",
+              "format": "date",
+              "description": "Date of vendor signature."
+            }
+          },
+          "required": ["name", "title"]
+        }
+      }
+    }
+  },
+  "required": [
+    "document_info",
+    "parties",
+    "project_overview",
+    "scope",
+    "deliverables",
+    "timeline",
+    "pricing"
+  ]
+}
